@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "930896839134",
+    "project_id": "metrogeniusorg-5ddd4",
+    "storage_bucket": "metrogeniusorg-5ddd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930896839134:android:eae76ce308970e2f92dd4f",
+        "android_client_info": {
+          "package_name": "com.example.metrogeniusorg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCibnTHqpI6GGS4oe4MKLJ9c0iz2obDoaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
