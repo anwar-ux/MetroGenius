@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
-import 'package:metrogeniusorg/services/google_auth_service.dart';
 import 'package:metrogeniusorg/src/screens/User_login/user_register.dart';
+import 'package:metrogeniusorg/src/screens/User_login/widgets/divider.dart';
+import 'package:metrogeniusorg/src/screens/User_login/widgets/fbgoogle_login.dart';
 import 'package:metrogeniusorg/src/screens/home/bottom_navigation.dart';
 import 'package:metrogeniusorg/src/widgets/login_button.dart';
 import 'package:metrogeniusorg/src/widgets/login_textfield.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
+// ignore: must_be_immutable
 class UserLogin extends StatelessWidget {
   UserLogin({super.key});
   final emailFocusNode = FocusNode();
@@ -143,93 +144,6 @@ class UserLogin extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class FbGoogleLogin extends StatelessWidget {
-   FbGoogleLogin({
-    super.key,
-   
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Container(
-          height: 65,
-          width: 120,
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color.fromARGB(255, 214, 214, 214)),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-              child: Image.network(
-            'https://clipground.com/images/facebook-icon-logo-8.png',
-            height: 45,
-            width: 45,
-          )),
-        ),
-        GestureDetector(
-          onTap:()
-            async {
-            User? user = await GoogleAuthService.signWithGoogle();
-            if (user != null) {
-              print('Signed in as ${user.displayName}');
-            } else {
-              print('Sign in failed');
-            }
-          },
-          child: Container(
-            height: 65,
-            width: 120,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color.fromARGB(255, 214, 214, 214)),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-                child: Image.network(
-              'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png',
-              height: 45,
-              width: 45,
-            )),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class LoginDivider extends StatelessWidget {
-  LoginDivider({
-    super.key,
-    required this.text,
-  });
-
-  String text;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Expanded(
-          child: Divider(
-            indent: 10,
-            color: Color.fromARGB(255, 214, 214, 214),
-          ),
-        ),
-        Constants.spaceWidth10,
-        Text(text),
-        Constants.spaceWidth10,
-        const Expanded(
-          child: Divider(
-            endIndent: 10,
-            color: Color.fromARGB(255, 214, 214, 214),
-          ),
-        ),
-      ],
     );
   }
 }

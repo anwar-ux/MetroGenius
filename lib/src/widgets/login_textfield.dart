@@ -10,16 +10,19 @@ class LoginTextfield extends StatelessWidget {
     this.validator,
     this.controller,
     this.focusNode,
+    this.onChanged,
   });
   String hint;
   Widget? suffix;
   String? Function(String?)? validator;
   TextEditingController? controller;
+  void Function(String)? onChanged;
   FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: focusNode,
+      onChanged:onChanged ,
       controller: controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
