@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
-class BackButton extends StatelessWidget {
-  const BackButton({
+class BackButtonCustom extends StatelessWidget {
+  const BackButtonCustom({
     super.key,
   });
 

@@ -1,8 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
-import 'package:metrogeniusorg/src/screens/getstart/common_login_page.dart';
+import 'package:metrogeniusorg/services/admin/applications/get_applications.dart';
+import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
+import 'package:metrogeniusorg/services/user/registation/user_signin_auth.dart';
+import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
+import 'package:metrogeniusorg/src/admin/screens/home/application/bloc/getemployeeapplication/get_employee_applications_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 void main() async {
@@ -19,13 +28,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      color: AppColors.primaryColor,
-      theme:ThemeData(
-       textTheme:GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme)
+    return  MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserSignupBloc(UserSignupAuth()),
+        ),
+        BlocProvider(
+          create: (context) => UserSigninBloc(UserSigninAuth()),
+        ),
+        BlocProvider(
+          create: (context) => EmployeeJobApplicationBloc(EmployeeJobapllication()),
+        ),
+        BlocProvider(
+          create: (context) => GetEmployeeApplicationsBloc(GetApplications()),
+          lazy: false,
+        )
+      ],
+      child: MaterialApp(
+        color: AppColors.primaryColor,
+        theme:ThemeData(
+         textTheme:GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme)
+        ),
+        debugShowCheckedModeBanner: false,
+        home:const CommonLoginPage(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: CommonLoginPage(),
     );
   }
 }
