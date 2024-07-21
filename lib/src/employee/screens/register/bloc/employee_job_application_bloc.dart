@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
+import 'package:random_string/random_string.dart';
 part 'employee_job_application_event.dart';
 part 'employee_job_application_state.dart';
 
@@ -58,7 +59,9 @@ class EmployeeJobApplicationBloc
       FormSubmit event, Emitter<EmployeeJobApplicationState> emit) async {
     emit(state.copyWith(status: FormStatus.pending));
     try {
+       final genaratedId = randomAlphaNumeric(6);
       final emplyeeDetails = employeeJobapllication.employeeAplicationInfo(
+        id: genaratedId,
         email: state.email,
         name: state.name,
         phone: state.phone,
@@ -68,7 +71,7 @@ class EmployeeJobApplicationBloc
         image: state.image,
       );
       final result =
-          await employeeJobapllication.addEmployeeAplication(emplyeeDetails);
+          await employeeJobapllication.addEmployeeAplication(emplyeeDetails,genaratedId);
       if (result) {
         emit(state.copyWith(status: FormStatus.success));
       } else {

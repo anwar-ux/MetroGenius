@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:random_string/random_string.dart';
 
 class EmployeeJobapllication {
-  Future<bool> addEmployeeAplication(employeeAplicationInfo) async {
+  Future<bool> addEmployeeAplication(employeeAplicationInfo,id) async {
     try {
-      final id = randomAlphaNumeric(6);
+     
       await FirebaseFirestore.instance
           .collection("EmployeeAplications")
-          .doc(id.toString())
+          .doc(id)
           .set(employeeAplicationInfo);
       return true;
     } catch (e) {
@@ -16,6 +15,7 @@ class EmployeeJobapllication {
   }
 
   Map<String, dynamic> employeeAplicationInfo({
+    required String id,
     required String email,
     required String name,
     required int phone,
@@ -25,6 +25,7 @@ class EmployeeJobapllication {
     required String image,
   }) {
     Map<String, dynamic> employeeAplicationInfo = {
+      'Id':id,
       'Email': email,
       'Name': name,
       'Phone': phone,

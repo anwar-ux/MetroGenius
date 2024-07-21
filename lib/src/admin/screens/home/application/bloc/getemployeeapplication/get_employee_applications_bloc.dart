@@ -7,7 +7,7 @@ part 'get_employee_applications_state.dart';
 
 class GetEmployeeApplicationsBloc
     extends Bloc<GetEmployeeApplicationsEvent, GetEmployeeApplicationsState> {
-  final GetApplications adminServices;
+  final Applications adminServices;
 
   GetEmployeeApplicationsBloc(this.adminServices)
       : super(GetEmployeeApplicationsInitial()) {
@@ -18,7 +18,7 @@ class GetEmployeeApplicationsBloc
   Future<void> _onFetchData(FetchData event, Emitter<GetEmployeeApplicationsState> emit) async {
     emit(GetEmployeeApplicationsLoading());
     try {
-      Stream<QuerySnapshot> dataStream = await adminServices.getEmployeeApplicatons();
+      Stream<QuerySnapshot> dataStream = await Applications.getEmployeeApplicatons();
       dataStream.listen((snapshot) {
         final data = snapshot.docs;
         add(DataFetched(data));

@@ -23,17 +23,19 @@ class RegisterPhotoContainer extends StatelessWidget {
         GestureDetector(
           onTap: action,
           child: Container(
-            height: 110,
+            height: 120,
             width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: AppColors.lightGrey,
             ),
-            child: Column(
+            child: image != null?
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                   child: Image.file(File(image!),fit: BoxFit.cover,)) : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                image != null?
-                Image.file(File(image!)) :
+               
                 Icon(
                   Icons.person,
                   size: 20,

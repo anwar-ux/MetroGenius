@@ -1,8 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
+import 'package:metrogeniusorg/functions/image_convertion.dart';
 import 'package:metrogeniusorg/functions/image_picker.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/register_details_page.dart';
@@ -30,7 +35,8 @@ class JobApplicationPage extends StatelessWidget {
   final passwordFocusNode = FocusNode();
   final conPasswordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  String? imageUrl;
+
+  String? img;
 
   @override
   Widget build(BuildContext context) {
@@ -91,17 +97,17 @@ class JobApplicationPage extends StatelessWidget {
                                 try {
                                   final pickedImage = await imagePicker();
                                   if (pickedImage != null) {
-                                    final imageString = pickedImage.path;
                                     context
                                         .read<EmployeeJobApplicationBloc>()
-                                        .add(PhotoChanged(imageString));
-                                    imageUrl = state.image;
+                                        .add(PhotoChanged(pickedImage.path));
+
+                                    img = pickedImage.path;
                                   }
                                 } catch (e) {
                                   print('Error selecting image: $e');
                                 }
                               },
-                              image: imageUrl,
+                              image: img,
                             ),
                             Constants.spaceHight10,
                             CustomTextfield(
@@ -248,31 +254,74 @@ class JobApplicationPage extends StatelessWidget {
                               },
                               onTapSuffix: () async {
                                 final idProof = await imagePicker();
-                                final idProofUrl = idProof.path;
-                                if (idProofUrl != null) {
-                                  context
-                                      .read<EmployeeJobApplicationBloc>()
-                                      .add(IdproofChanged(idProofUrl));
-                                  idController.text = state.iDproof;
+
+                                if (idProof != null) {
+                                  final File iDproofFile = File(idProof.path);
+                                  idController.text = iDproofFile.path;
                                 }
                               },
                             ),
                             Constants.spaceHight20,
                             Constants.spaceHight10,
                             CustomButton(
-                              title: 'Submit',
-                              action: () {
-                                if (_formKey.currentState!.validate()) {
-                                  context
-                                      .read<EmployeeJobApplicationBloc>()
-                                      .add(FormSubmit());
-                                  context
-                                      .read<EmployeeJobApplicationBloc>()
-                                      .add(FormClear());
-                                  _formKey.currentState?.reset();
-                                }
-                              },
-                            ),
+                                title: 'Submit',
+                                action: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    String? photoUrl;
+                                    String? idProofUrl;
+
+                                    if (img != null) {
+                                      try {
+                                        final imageFile = File(img!);
+                                        photoUrl = await uploadImageToFirebase(
+                                            imageFile);
+                                        if (photoUrl != null) {
+                                          context
+                                              .read<
+                                                  EmployeeJobApplicationBloc>()
+                                              .add(PhotoChanged(photoUrl));
+
+                                          if (idController.text.isNotEmpty) {
+                                            final idProofFile =
+                                                File(idController.text);
+                                            idProofUrl =
+                                                await uploadImageToFirebase(
+                                                    idProofFile);
+
+                                            if (idProofUrl != null) {
+                                              context
+                                                  .read<
+                                                      EmployeeJobApplicationBloc>()
+                                                  .add(
+                                                    IdproofChanged(idProofUrl),
+                                                  );
+                                            }
+                                          }
+                                          context
+                                              .read<
+                                                  EmployeeJobApplicationBloc>()
+                                              .add(FormSubmit());
+                                          _formKey.currentState?.reset();
+                                        } else {
+                                          showCustomSnackbar(
+                                              context,
+                                              'Failed',
+                                              'Failed to upload photo',
+                                              Colors.red);
+                                        }
+                                      } catch (e) {
+                                        showCustomSnackbar(
+                                            context,
+                                            'Failed',
+                                            'Error uploading images: $e',
+                                            Colors.red);
+                                      }
+                                    } else {
+                                      showCustomSnackbar(context, 'Failed',
+                                          'Please select a photo', Colors.red);
+                                    }
+                                  }
+                                }),
                           ],
                         ),
                       ),

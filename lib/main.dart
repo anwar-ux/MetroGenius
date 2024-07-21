@@ -7,6 +7,7 @@ import 'package:metrogeniusorg/services/admin/applications/get_applications.dart
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signin_auth.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
+import 'package:metrogeniusorg/src/admin/screens/home/application/bloc/button_click/accept_reject_bloc.dart';
 import 'package:metrogeniusorg/src/admin/screens/home/application/bloc/getemployeeapplication/get_employee_applications_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
@@ -40,7 +41,11 @@ class MyApp extends StatelessWidget {
           create: (context) => EmployeeJobApplicationBloc(EmployeeJobapllication()),
         ),
         BlocProvider(
-          create: (context) => GetEmployeeApplicationsBloc(GetApplications()),
+          create: (context) => GetEmployeeApplicationsBloc(Applications()),
+          lazy: false,
+        ),
+         BlocProvider(
+          create: (context) => AcceptRejectBloc(),
           lazy: false,
         )
       ],
