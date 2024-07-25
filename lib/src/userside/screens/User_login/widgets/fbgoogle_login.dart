@@ -30,7 +30,7 @@ class FbGoogleLogin extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () async {
-            User? user = await GoogleAuthService.signWithGoogle();
+            User? user = await GoogleAuthService.signInWithGoogle();
             if (user != null) {
               Navigator.of(context)
                   .pushReplacement(createRoute(const BottomNavigation()));

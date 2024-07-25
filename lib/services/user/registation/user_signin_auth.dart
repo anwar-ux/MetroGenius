@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserSigninAuth {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<User?> signInWithEmailAndPassword(String email, String password) async {
+ static Future<User?> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
-      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -19,6 +20,19 @@ class UserSigninAuth {
       }
     } catch (e) {
       throw Exception('Failed to sign in: $e');
+    }
+  }
+
+ static Future<bool> resetPassword(String email) async {
+    if (email.isNotEmpty) {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 }

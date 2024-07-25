@@ -44,6 +44,7 @@ class EmployeeJobApplicationBloc
       WorkChanged event, Emitter<EmployeeJobApplicationState> emit) {
     emit(state.copyWith(work: event.work));
   }
+  
 
   void _experienceChanged(
       ExperienceChanged event, Emitter<EmployeeJobApplicationState> emit) {
@@ -57,7 +58,7 @@ class EmployeeJobApplicationBloc
 
   void _formSubmit(
       FormSubmit event, Emitter<EmployeeJobApplicationState> emit) async {
-    emit(state.copyWith(status: FormStatus.pending));
+     emit(state.copyWith(status: FormStatus.pending));
     try {
        final genaratedId = randomAlphaNumeric(6);
       final emplyeeDetails = employeeJobapllication.employeeAplicationInfo(
@@ -72,6 +73,7 @@ class EmployeeJobApplicationBloc
       );
       final result =
           await employeeJobapllication.addEmployeeAplication(emplyeeDetails,genaratedId);
+         
       if (result) {
         emit(state.copyWith(status: FormStatus.success));
       } else {

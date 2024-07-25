@@ -57,7 +57,7 @@ child:  _children[_currentIndex],
           );
         },
 child:  Padding(
-        padding:const EdgeInsets.only(left: 12,right: 12,bottom: 15),
+        padding:const EdgeInsets.only(left: 12,right: 12,bottom: 16),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(26),

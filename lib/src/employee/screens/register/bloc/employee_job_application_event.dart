@@ -32,4 +32,5 @@ final class IdproofChanged extends EmployeeJobApplicationEvent {
 }
 final class FormSubmit extends EmployeeJobApplicationEvent {}
 
+
 final class FormClear extends EmployeeJobApplicationEvent {}

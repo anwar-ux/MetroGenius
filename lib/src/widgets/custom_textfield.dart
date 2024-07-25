@@ -37,7 +37,7 @@ class CustomTextfield extends StatelessWidget {
             head!,
             // ignore: prefer_const_constructors
             style: TextStyle(
-              color: AppColors.seconderyColor,
+              color: AppColors.primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),

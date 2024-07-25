@@ -6,14 +6,14 @@ part 'user_signin_event.dart';
 part 'user_signin_state.dart';
 
 class UserSigninBloc extends Bloc<UserSigninEvent, UserSigninState> {
-  UserSigninBloc(this._userSigninAuth) : super(const UserSigninState()) {
+  UserSigninBloc() : super(const UserSigninState()) {
     on<EmailChanged>(_emailChanged);
     on<PasswordChanged>(_passwordChanged);
     on<FormSubmit>(_formSubmit);
     on<UserLoggedOut>(_userLoggedOut);
   }
 
-  final UserSigninAuth _userSigninAuth;
+
 
   void _emailChanged(EmailChanged event, Emitter<UserSigninState> emit) {
     emit(state.copyWith(email: event.email));
@@ -27,7 +27,7 @@ class UserSigninBloc extends Bloc<UserSigninEvent, UserSigninState> {
       FormSubmit event, Emitter<UserSigninState> emit) async {
     emit(state.copyWith(status: FormStatus.pending));
     try {
-      final user = await _userSigninAuth.signInWithEmailAndPassword(
+      final user = await UserSigninAuth.signInWithEmailAndPassword(
         state.email,
         state.password,
       );

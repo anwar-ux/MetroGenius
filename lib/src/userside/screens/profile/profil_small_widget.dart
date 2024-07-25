@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 // ignore: must_be_immutable
@@ -9,11 +10,13 @@ class ProfileSmallWidget extends StatelessWidget {
       required this.sub,
       required this.positionTop,
       this.action,
+      this.leading,
       this.icon});
   String title;
   String sub;
   num positionTop;
   IconData? icon;
+  Widget? leading;
   void Function()? action;
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,7 @@ class ProfileSmallWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 1),
               ),
               trailing: Icon(icon),
+              leading: leading,
               subtitle: Text(sub),
             ),
           ),

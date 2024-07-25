@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
-import 'package:metrogeniusorg/services/admin/applications/get_applications.dart';
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signin_auth.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
-import 'package:metrogeniusorg/src/admin/screens/home/application/bloc/button_click/accept_reject_bloc.dart';
-import 'package:metrogeniusorg/src/admin/screens/home/application/bloc/getemployeeapplication/get_employee_applications_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpassword/forgot_password_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 void main() async {
@@ -35,19 +34,17 @@ class MyApp extends StatelessWidget {
           create: (context) => UserSignupBloc(UserSignupAuth()),
         ),
         BlocProvider(
-          create: (context) => UserSigninBloc(UserSigninAuth()),
+          create: (context) => UserSigninBloc(),
         ),
         BlocProvider(
           create: (context) => EmployeeJobApplicationBloc(EmployeeJobapllication()),
         ),
-        BlocProvider(
-          create: (context) => GetEmployeeApplicationsBloc(Applications()),
-          lazy: false,
-        ),
          BlocProvider(
-          create: (context) => AcceptRejectBloc(),
-          lazy: false,
-        )
+          create: (context) => GetcategoryBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ForgotPasswordBloc(),
+        ),
       ],
       child: MaterialApp(
         color: AppColors.primaryColor,

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
-import 'package:metrogeniusorg/src/admin/screens/home/admin_bottom_navigation.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/User_login/forgot_password.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/user_register.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/widgets/divider.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/widgets/fbgoogle_login.dart';
@@ -107,12 +107,15 @@ class UserLogin extends StatelessWidget {
                         },
                       ),
                       Constants.spaceHight10,
-                      const Row(
+                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            'Forgot Password?',
-                            style: TextStyle(color: Colors.black87),
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).push(createRoute(ForgotPasswordPage())),
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(color: Colors.black87),
+                            ),
                           )
                         ],
                       ),
@@ -121,13 +124,7 @@ class UserLogin extends StatelessWidget {
                         title: 'Login',
                         action: () {
                           if (_formKey.currentState!.validate()) {
-                            if (emailController.text == 'admin333@gmail.com' &&
-                                passController.text == '333admin') {
-                              Navigator.of(context).pushReplacement(
-                                  createRoute(const AdminBottomNavigation()));
-                            } else {
-                              context.read<UserSigninBloc>().add(FormSubmit());
-                            }
+                            context.read<UserSigninBloc>().add(FormSubmit());
                           }
                         },
                       ),

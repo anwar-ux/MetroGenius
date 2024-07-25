@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
+import 'package:metrogeniusorg/services/user/registation/google_auth_service.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/profil_small_widget.dart';
@@ -50,19 +52,20 @@ class Profile extends StatelessWidget {
           ProfileSmallWidget(
             action: () {
               alertDialogCustom(
-               context:  context,
-              title:   'Logout',
-               message:  'Are you sure you want to log out?',
-              firstButtonText:   'Cancel',
-               secondButtonText:  'Logout',
-              firstButtonAction:  () {
-              Navigator.of(context).pop();
-            },
-           secondButtonAction:  () {
-              context.read<UserSigninBloc>().add(UserLoggedOut());
-              Navigator.of(context)
-                  .pushReplacement(createRoute(const CommonLoginPage()));
-            }, 
+                context: context,
+                title: 'Logout',
+                message: 'Are you sure you want to log out?',
+                firstButtonText: 'Cancel',
+                secondButtonText: 'Logout',
+                firstButtonAction: () {
+                  Navigator.of(context).pop();
+                },
+                secondButtonAction: () {
+                  context.read<UserSigninBloc>().add(UserLoggedOut());
+                  GoogleAuthService.signOutWithGoogle();
+                  Navigator.of(context)
+                      .pushReplacement(createRoute(const CommonLoginPage()));
+                },
               );
             },
             positionTop: 0.80,

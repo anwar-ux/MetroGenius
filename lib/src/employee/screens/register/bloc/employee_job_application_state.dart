@@ -57,3 +57,5 @@ class EmployeeJobApplicationState {
     return const EmployeeJobApplicationState();
   }
 }
+
+final class EmployeeJobApplicationLoding extends EmployeeJobApplicationState{}
