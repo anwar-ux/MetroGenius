@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
@@ -33,7 +31,7 @@ class RegisterPhotoContainer extends StatelessWidget {
             child: image != null?
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                   child: Image.file(File(image!),fit: BoxFit.cover,)) : Column(
+                   child: Image.file(File(image!),fit: BoxFit.cover,)) : const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                

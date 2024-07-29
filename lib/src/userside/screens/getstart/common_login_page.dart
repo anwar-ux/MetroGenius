@@ -17,7 +17,7 @@ class CommonLoginPage extends StatelessWidget {
           Row(
             children: [
               CommonLoginContainer(
-                action: () => Navigator.of(context).push(createRoute( UserLogin())),
+                action: () => Navigator.of(context).push(createRoute(UserLogin())),
                 hight: 150,
                 image: 'assets/3069_REpWIFlVTCAxMjItNTA.jpg',
                 content: 'To place any type of order\nwith the help of our app',
@@ -35,10 +35,9 @@ class CommonLoginPage extends StatelessWidget {
             children: [
               Constants.spaceWidth20,
               CommonLoginContainer(
-                 action: () => Navigator.of(context).push(createRoute(const RegisterDetailsPage())),
+                action: () => Navigator.of(context).push(createRoute(const RegisterDetailsPage())),
                 hight: 150,
-                image:
-                    'assets/vecteezy_illustration-of-hiring-with-magnifying-glass-in-the-middle_.jpg',
+                image: 'assets/vecteezy_illustration-of-hiring-with-magnifying-glass-in-the-middle_.jpg',
                 content: 'Search and apply for jobs in\nyour field of activity',
                 title: 'I want to find a job',
                 radius: const BorderRadius.only(
@@ -52,8 +51,7 @@ class CommonLoginPage extends StatelessWidget {
           Row(
             children: [
               CommonLoginContainer(
-                image:
-                    'assets/vecteezy_office-card-creative-icon-design_15054354.jpg',
+                image: 'assets/vecteezy_office-card-creative-icon-design_15054354.jpg',
                 hight: 154,
                 content: 'This is for the login of\nemployees of MetroGenius',
                 title: 'Currently working on\nMetroGenius',
@@ -73,14 +71,15 @@ class CommonLoginPage extends StatelessWidget {
 
 // ignore: must_be_immutable
 class CommonLoginContainer extends StatelessWidget {
-  CommonLoginContainer(
-      {super.key,
-      required this.content,
-      required this.hight,
-      required this.title,
-      required this.image,
-      this.action,
-      required this.radius});
+  CommonLoginContainer({
+    super.key,
+    required this.content,
+    required this.hight,
+    required this.title,
+    required this.image,
+    this.action,
+    required this.radius,
+  });
   String title;
   String content;
   BorderRadius radius;
@@ -89,10 +88,10 @@ class CommonLoginContainer extends StatelessWidget {
   void Function()? action;
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
-        child:GestureDetector(
-      onTap:action ,
-      child: Container(
+    return Expanded(
+      child: GestureDetector(
+        onTap: action,
+        child: Container(
           height: hight,
           decoration: BoxDecoration(
             color: AppColors.seconderyColor,
@@ -119,16 +118,14 @@ class CommonLoginContainer extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
                           content,
-                          style:
-                              const TextStyle(fontSize: 16, color: Colors.grey),
+                          style: const TextStyle(fontSize: 16, color: Colors.grey),
                         )
                       ],
                     ),
@@ -141,12 +138,11 @@ class CommonLoginContainer extends StatelessWidget {
                   height: 150,
                   width: 120,
                   child: Image.asset(
-                      image,
-                      fit: BoxFit.contain,
-                    ),
+                    image,
+                    fit: BoxFit.contain,
                   ),
                 ),
-              
+              ),
             ],
           ),
         ),

@@ -58,8 +58,9 @@ class EmployeeJobApplicationBloc
 
   void _formSubmit(
       FormSubmit event, Emitter<EmployeeJobApplicationState> emit) async {
-     emit(state.copyWith(status: FormStatus.pending));
+   
     try {
+        emit(state.copyWith(status: FormStatus.pending));
        final genaratedId = randomAlphaNumeric(6);
       final emplyeeDetails = employeeJobapllication.employeeAplicationInfo(
         id: genaratedId,

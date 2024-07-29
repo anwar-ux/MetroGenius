@@ -11,8 +11,6 @@ class UserCategorys extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Category'),
         centerTitle: true,
-       
-       
       ),
       body: CustomScrollView(
         slivers: [AllServicesGrid()],

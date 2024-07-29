@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
-import 'package:metrogeniusorg/services/user/registation/user_signin_auth.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpassword/forgot_password_bloc.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => UserSignupBloc(UserSignupAuth()),
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => EmployeeJobApplicationBloc(EmployeeJobapllication()),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => GetcategoryBloc(),
         ),
         BlocProvider(
@@ -48,11 +47,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         color: AppColors.primaryColor,
-        theme:ThemeData(
-         textTheme:GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme)
-        ),
+        theme: ThemeData(textTheme: GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
-        home:const CommonLoginPage(),
+        home: const CommonLoginPage(),
       ),
     );
   }

@@ -97,15 +97,15 @@ class ServiceHeadings extends StatelessWidget {
         GestureDetector(
           onTap:action ,
           child: Container(
-            height: 25,
+            height: 30,
             width: 90,
             decoration: BoxDecoration(
                 color: AppColors.thirdColor.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(15)),
             child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('ViewAll'),
+                Text('Viewall '),
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 10,

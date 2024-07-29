@@ -1,7 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: avoid_print
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:firebase_storage/firebase_storage.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
@@ -18,6 +16,7 @@ static Future<String?> uploadImageToFirebase(File imageFile) async {
 
     // Listen for upload progress
     uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+    
       print('Upload is ${snapshot.bytesTransferred}/${snapshot.totalBytes} (${(snapshot.bytesTransferred / snapshot.totalBytes * 100).toStringAsFixed(0)}%)');
     });
 
@@ -30,8 +29,4 @@ static Future<String?> uploadImageToFirebase(File imageFile) async {
     return null;
   }
 }
-static Uint8List convertStringToBytes(String input) {
-  List<int> utf8List = utf8.encode(input);
-  return Uint8List.fromList(utf8List);
-} 
 }

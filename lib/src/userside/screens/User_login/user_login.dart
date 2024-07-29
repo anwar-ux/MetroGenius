@@ -8,11 +8,13 @@ import 'package:metrogeniusorg/src/userside/screens/User_login/user_register.dar
 import 'package:metrogeniusorg/src/userside/screens/User_login/widgets/divider.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/widgets/fbgoogle_login.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bottom_navigation.dart';
+import 'package:metrogeniusorg/src/widgets/circular.dart';
 import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/src/widgets/custom_textfield.dart';
 import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
+import 'package:metrogeniusorg/utils/validations.dart';
 
 // ignore: must_be_immutable
 class UserLogin extends StatelessWidget {
@@ -26,17 +28,20 @@ class UserLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: AppColors.seconderyColor,
       body: BlocConsumer<UserSigninBloc, UserSigninState>(
         listener: (context, state) {
           if (state.status == FormStatus.success) {
-            showCustomSnackbar(
-                context, 'Success', 'Login as \n${state.email}', Colors.green);
-            Navigator.of(context)
-                .pushReplacement(createRoute(const BottomNavigation()));
+            showCustomSnackbar(context, 'Success', 'Login as \n${state.email}', Colors.green);
+            Navigator.of(context).pushReplacement(createRoute(const BottomNavigation()));
           } else if (state.status == FormStatus.error) {
-            showCustomSnackbar(
-                context, 'Failed', 'invalid email or password', Colors.red);
+            showCustomSnackbar(context, 'Failed', 'invalid email or password', Colors.red);
+          } else if (state.status == FormStatus.pending) {
+            buildShowDialog(context);
           }
         },
         builder: (context, state) {
@@ -64,55 +69,31 @@ class UserLogin extends StatelessWidget {
                       ),
                       Constants.spaceHight40,
                       CustomTextfield(
-                        onChanged: (value) => context
-                            .read<UserSigninBloc>()
-                            .add(EmailChanged(value)),
-                        controller: emailController,
-                        focusNode: emailFocusNode,
-                        hint: 'Enter your email',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Enter your email';
-                          }
-                          // Basic email validation regex
-                          final emailRegex = RegExp(
-                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                          if (!emailRegex.hasMatch(value)) {
-                            return 'Enter a valid email';
-                          }
-                          return null;
-                        },
-                      ),
+                          onChanged: (value) => context.read<UserSigninBloc>().add(EmailChanged(value)),
+                          controller: emailController,
+                          focusNode: emailFocusNode,
+                          hint: 'Enter your email',
+                          validator: Validations.email),
                       Constants.spaceHight20,
                       CustomTextfield(
                         controller: passController,
                         focusNode: passwordFocusNode,
-                        onChanged: (value) => context
-                            .read<UserSigninBloc>()
-                            .add(PasswordChanged(value)),
+                        onChanged: (value) => context.read<UserSigninBloc>().add(PasswordChanged(value)),
                         hint: 'Password',
                         obscureText: true,
                         suffix: const Icon(
                           Icons.remove_red_eye_outlined,
                           size: 18,
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Enter your password';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
+                        validator: Validations.password,
                       ),
                       Constants.spaceHight10,
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () => Navigator.of(context).push(createRoute(ForgotPasswordPage())),
-                            child: Text(
+                            child: const Text(
                               'Forgot Password?',
                               style: TextStyle(color: Colors.black87),
                             ),
@@ -128,8 +109,6 @@ class UserLogin extends StatelessWidget {
                           }
                         },
                       ),
-                      if (state.status == FormStatus.pending)
-                        const CupertinoActivityIndicator(),
                       Constants.spaceHight40,
                       LoginDivider(
                         text: 'or Login with',
@@ -143,8 +122,7 @@ class UserLogin extends StatelessWidget {
                           const Text('Don’t have an account?'),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .push(createRoute(UserRegister()));
+                              Navigator.of(context).push(createRoute(UserRegister()));
                             },
                             child: const Text(
                               'Register Now',

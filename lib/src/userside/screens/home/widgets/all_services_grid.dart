@@ -43,7 +43,7 @@ class AllServicesGrid extends StatelessWidget {
           } else if (state is GetCategoryLoaded) {
             return SliverGrid(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 150,
+                maxCrossAxisExtent: 180,
                 mainAxisExtent: 100,
                 mainAxisSpacing: 6,
                 crossAxisSpacing: 6,
