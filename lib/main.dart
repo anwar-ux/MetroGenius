@@ -10,7 +10,7 @@ import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpasswo
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 void main() async {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory_bloc.dart';
+import 'package:metrogeniusorg/animation/route_animation.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/sub_category.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
@@ -71,40 +73,43 @@ class AllServicesGrid extends StatelessWidget {
                   } else {
                     if (index < state.data.length) {
                       final doc = state.data[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.seconderyColor,
-                          boxShadow: [ BoxShadow(
-                      color: AppColors.lightGrey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    
-                      ),],
-                          border: Border.all(color: AppColors.seconderyColor),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(doc['Image'])),
-                                ],
-                              ),
-                              Text(
-                                doc['Name'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1),
-                              ),
-                            ],
+                      return GestureDetector(
+                        onTap: () => Navigator.of(context).push(createRoute(SubCategory(categoryId: doc['Id'], categoryName: doc['Name']))),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.seconderyColor,
+                            boxShadow: [ BoxShadow(
+                        color: AppColors.lightGrey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                                            
+                        ),],
+                            border: Border.all(color: AppColors.seconderyColor),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(doc['Image'])),
+                                  ],
+                                ),
+                                Text(
+                                  doc['Name'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/appbar/home_app_bar.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/categorys.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/categorys.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/widgets/all_services_grid.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/widgets/deal_of_day.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/widgets/refer_friend.dart';

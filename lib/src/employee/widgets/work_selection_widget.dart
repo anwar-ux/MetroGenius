@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 Future<void> workSelection(BuildContext context, TextEditingController workController) async {

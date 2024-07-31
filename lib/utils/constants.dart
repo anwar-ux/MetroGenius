@@ -10,6 +10,9 @@ class Constants {
   static const spaceHight20 = SizedBox(
     height: 20,
   );
+  static const spaceHight5 = SizedBox(
+    height: 5,
+  );
   static const spaceHight40 = SizedBox(
     height: 40,
   );

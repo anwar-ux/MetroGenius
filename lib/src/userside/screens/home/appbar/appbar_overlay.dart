@@ -5,10 +5,11 @@ import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
 class AppBarOverlay extends StatelessWidget {
-  const AppBarOverlay({
+   AppBarOverlay({
     super.key,
+    this.image,
   });
-
+   String? image;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -17,7 +18,7 @@ class AppBarOverlay extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(35),
           child: Image.network(
-            'https://static.asianpaints.com/content/dam/asian_paints/services/beautiful-homes-service/dark-grey-living-room.jpg',
+            image??'https://static.asianpaints.com/content/dam/asian_paints/services/beautiful-homes-service/dark-grey-living-room.jpg',
             fit: BoxFit.cover,
           ),
         ),
@@ -43,11 +44,7 @@ class AppBarOverlay extends StatelessWidget {
               children: [
                 const Text(
                   'Hey,What you are looking for today',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      color: AppColors.primaryColor),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, letterSpacing: 1, color: AppColors.primaryColor),
                 ),
                 Constants.spaceHight15,
                 Stack(
@@ -70,23 +67,15 @@ class AppBarOverlay extends StatelessWidget {
                           Icons.manage_search_sharp,
                           color: AppColors.primaryColor,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(35))),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(35))),
-                        disabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(35))),
+                        enabledBorder:
+                            OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(35))),
+                        focusedBorder:
+                            OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(35))),
+                        disabledBorder:
+                            OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(35))),
                         filled: true,
                         fillColor: Colors.transparent,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.lightGrey),
-                          borderRadius: BorderRadius.all(Radius.circular(35))),
+                        border: OutlineInputBorder(borderSide: BorderSide(color: AppColors.lightGrey), borderRadius: BorderRadius.all(Radius.circular(35))),
                       ),
                     ),
                   ],

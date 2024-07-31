@@ -14,9 +14,9 @@ class HomeScreenAppbar extends StatelessWidget {
       automaticallyImplyLeading: false,
       expandedHeight: 250.0,
       pinned: true,
-      flexibleSpace: const FlexibleSpaceBar(
-        titlePadding: EdgeInsets.symmetric(horizontal: 15),
-        title: Column(
+      flexibleSpace:  FlexibleSpaceBar(
+        titlePadding: const EdgeInsets.symmetric(horizontal: 15),
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
