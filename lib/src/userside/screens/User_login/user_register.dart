@@ -114,6 +114,7 @@ class UserRegister extends StatelessWidget {
                       ),
                       Constants.spaceHight20,
                       CustomButton(
+                        width: double.infinity,
                         title: 'Register',
                         action: () {
                           if (_formKey.currentState!.validate()) {

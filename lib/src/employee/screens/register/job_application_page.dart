@@ -52,9 +52,7 @@ class JobApplicationPage extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state.status == FormStatus.success) {
-          return const Center(child: Text('Application submitted successfully!'));
-        } else if (state.status == FormStatus.error) {
+        if (state.status == FormStatus.error) {
           return Center(child: Text('Error: ${state.errorMsg}'));
         } else {
           return Scaffold(
@@ -86,6 +84,7 @@ class JobApplicationPage extends StatelessWidget {
                                 Constants.spaceHight35,
                                 RegisterPhotoContainer(
                                   action: () async {
+                                    
                                     try {
                                       final pickedImage = await imagePicker();
                                       if (pickedImage != null) {
@@ -194,25 +193,25 @@ class JobApplicationPage extends StatelessWidget {
                                 Constants.spaceHight20,
                                 Constants.spaceHight10,
                                 CustomButton(
+                                  width: double.infinity,
                                   title: 'Submit',
                                   action: () async {
+                                    context.read<EmployeeJobApplicationBloc>().add(PendingFrom());
                                     if (_formKey.currentState!.validate()) {
-                                 
-
                                       if (img != null) {
                                         try {
-                                         final photoUrl = await ImageConvertion.uploadImageToFirebase(File(img!));
+                                          final photoUrl = await ImageConvertion.uploadImageToFirebase(File(img!));
                                           if (photoUrl != null) {
                                             context.read<EmployeeJobApplicationBloc>().add(PhotoChanged(photoUrl));
 
                                             if (idproof != null) {
-                                            final  idProofUrl = await ImageConvertion.uploadImageToFirebase(File(idproof!));
+                                              final idProofUrl = await ImageConvertion.uploadImageToFirebase(File(idproof!));
 
                                               if (idProofUrl != null) {
                                                 context.read<EmployeeJobApplicationBloc>().add(IdproofChanged(idProofUrl));
                                               }
                                             }
-                                          
+
                                             context.read<EmployeeJobApplicationBloc>().add(FormSubmit());
 
                                             _formKey.currentState?.reset();

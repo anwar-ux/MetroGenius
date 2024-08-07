@@ -102,6 +102,7 @@ class UserLogin extends StatelessWidget {
                       ),
                       Constants.spaceHight20,
                       CustomButton(
+                        width: double.infinity,
                         title: 'Login',
                         action: () {
                           if (_formKey.currentState!.validate()) {

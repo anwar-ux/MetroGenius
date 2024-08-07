@@ -6,6 +6,7 @@ import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/services/user/registation/google_auth_service.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bottom_navigation.dart';
 import 'package:metrogeniusorg/src/widgets/circular.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FbGoogleLogin extends StatelessWidget {
   FbGoogleLogin({Key? key}) : super(key: key);
@@ -37,6 +38,9 @@ class FbGoogleLogin extends StatelessWidget {
             User? user = await GoogleAuthService.signInWithGoogle();
             Navigator.of(context).pop();
             if (user != null) {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('userId', user.uid);
+              print(user.uid);
               Navigator.of(context).pushReplacement(createRoute(const BottomNavigation()));
             } else {
               ScaffoldMessenger.of(context).showSnackBar(

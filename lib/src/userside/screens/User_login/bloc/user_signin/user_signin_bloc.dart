@@ -2,8 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signin_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'user_signin_event.dart';
 part 'user_signin_state.dart';
+
 
 class UserSigninBloc extends Bloc<UserSigninEvent, UserSigninState> {
   UserSigninBloc() : super(const UserSigninState()) {
@@ -32,6 +34,9 @@ class UserSigninBloc extends Bloc<UserSigninEvent, UserSigninState> {
         state.password,
       );
       if (user != null) {
+        final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userId', user.uid);
+
         emit(state.copyWith(status: FormStatus.success));
       } else {
         emit(state.copyWith(

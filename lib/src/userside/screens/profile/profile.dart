@@ -4,8 +4,9 @@ import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/services/user/registation/google_auth_service.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
-import 'package:metrogeniusorg/src/userside/screens/profile/profil_small_widget.dart';
-import 'package:metrogeniusorg/src/userside/screens/profile/profile_main_widget.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/widgets/profil_small_widget.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/widgets/profile_main_widget.dart';
 import 'package:metrogeniusorg/src/widgets/alertdialog_custom.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
@@ -19,6 +20,7 @@ class Profile extends StatelessWidget {
         children: [
           const ProfileContainer(),
           ProfileSmallWidget(
+            action: () => Navigator.of(context).push(createRoute(Address())),
             positionTop: 0.30,
             title: 'Address',
             sub: 'chundattu(H),cheruvattoor,kothamang....',

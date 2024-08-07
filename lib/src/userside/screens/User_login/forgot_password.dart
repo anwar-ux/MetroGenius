@@ -70,6 +70,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   ),
                   Constants.spaceHight35,
                   CustomButton(
+                    width: double.infinity,
                     title: 'Submit',
                     action: () {
                       context.read<ForgotPasswordBloc>().add(FormSubmit());

@@ -44,4 +44,20 @@ class Validations {
     }
     return null;
   };
+  static String? Function(String?)? common = (value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter esantial details';
+    }
+
+    return null;
+  };
+  static String? Function(String?)? pincode = (value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter your pincode';
+    }
+    if (value.length < 6) {
+      return 'Enter valid pincode';
+    }
+    return null;
+  };
 }

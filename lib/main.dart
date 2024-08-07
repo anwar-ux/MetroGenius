@@ -11,6 +11,9 @@ import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/bloc/add_addres/add_address_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/bloc/get_address/get_address_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 void main() async {
@@ -43,6 +46,13 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ForgotPasswordBloc(),
+        ),
+         BlocProvider(
+          create: (context) => AddAddressBloc(),
+        ),
+         BlocProvider(
+          create: (context) => GetAddressBloc(),
+          child: Address(),
         ),
       ],
       child: MaterialApp(

@@ -65,6 +65,7 @@ class RegisterDetailsPage extends StatelessWidget {
                   ),
                   Constants.spaceHight50,
                   CustomButton(
+                    width: double.infinity,
                       title: 'Register',
                       action: () => Navigator.of(context)
                           .push(createRoute(JobApplicationPage())))

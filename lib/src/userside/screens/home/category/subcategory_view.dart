@@ -1,43 +1,55 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/appbar/subcategoryappbar.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/bottom_sheet.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/custombookingbutton.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/subcategorydetails.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/usercheckboxes.dart';
+import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 class SubcategoryView extends StatelessWidget {
   final dynamic data;
-
-  SubcategoryView({Key? key, required this.data}) : super(key: key);
+  final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+  SubcategoryView({super.key, required this.data});
+  String? value;
 
   @override
   Widget build(BuildContext context) {
+    void handleCheckboxChange(String? selectedKey) {
+      value = selectedKey;
+    }
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: AppColors.primaryColor,
-            automaticallyImplyLeading: true,
-            expandedHeight: 250.0,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.symmetric(horizontal: 15),
-              title: Text(
-                data['Name'],
-                style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SubcategoryViewAppBar(data: data),
+              UserCheckBoxes(
+                data: data,
+                onChanged: handleCheckboxChange,
               ),
-              background: Image.network(data['Image']),
-            ),
+              Subcategorydetails(data: data),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: data['Checkboxes'].keys.where((key) => data['Checkboxes'][key] == true).map<Widget>((key) {
-                return CheckboxListTile(
-                  title: Text(key),
-                  value: data['Checkboxes'][true] ?? true,
-                  onChanged: (bool? value) {
-                    // Handle onChanged logic here
-                  },
+          CustomBookingButton(
+            cartAction: () {},
+            bookAction: () {
+              if (value != null) {
+                bottomSheet(context,data,value!);
+              } else {
+                showCustomSnackbar(
+                  context,
+                  'Select a service',
+                  '',
+                  AppColors.thirdColor,
                 );
-              }).toList(),
-            ),
+              }
+            },
           ),
+         
         ],
       ),
     );

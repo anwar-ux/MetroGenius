@@ -3,20 +3,20 @@ import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
 class CustomTextfield extends StatelessWidget {
-  const CustomTextfield({
-    super.key,
-    required this.hint,
-    this.suffix,
-    this.validator,
-    this.controller,
-    this.focusNode,
-    this.onChanged,
-    this.head,
-    this.onTapSuffix,
-    this.obscureText,
-    this.readOnly
-  });
-
+  const CustomTextfield(
+      {super.key,
+      required this.hint,
+      this.suffix,
+      this.validator,
+      this.controller,
+      this.focusNode,
+      this.onChanged,
+      this.head,
+      this.onTapSuffix,
+      this.obscureText,
+       this.white,
+      this.readOnly});
+  final bool? white;
   final String hint;
   final Widget? suffix;
   final String? Function(String?)? validator;
@@ -36,7 +36,7 @@ class CustomTextfield extends StatelessWidget {
           Text(
             head!,
             style: TextStyle(
-              color: AppColors.primaryColor,
+              color:white??false? Colors.black:AppColors.primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -45,10 +45,10 @@ class CustomTextfield extends StatelessWidget {
         ],
         TextFormField(
           focusNode: focusNode,
-          readOnly:readOnly??false ,
+          readOnly: readOnly ?? false,
           onChanged: onChanged,
           controller: controller,
-          obscureText: obscureText??false,
+          obscureText: obscureText ?? false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           decoration: InputDecoration(

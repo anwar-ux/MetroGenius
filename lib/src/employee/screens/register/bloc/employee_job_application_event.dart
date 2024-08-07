@@ -31,6 +31,6 @@ final class IdproofChanged extends EmployeeJobApplicationEvent {
   final String iDproof;
 }
 final class FormSubmit extends EmployeeJobApplicationEvent {}
-
+final class PendingFrom extends EmployeeJobApplicationEvent {}
 
 final class FormClear extends EmployeeJobApplicationEvent {}

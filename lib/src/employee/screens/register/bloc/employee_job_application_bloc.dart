@@ -18,11 +18,16 @@ class EmployeeJobApplicationBloc
     on<IdproofChanged>(_idproofChanged);
     on<FormSubmit>(_formSubmit);
     on<FormClear>(_formClear);
+     on<PendingFrom>(_pendingFrom);
   }
   final EmployeeJobapllication employeeJobapllication;
   void _photoChanged(
       PhotoChanged event, Emitter<EmployeeJobApplicationState> emit) {
     emit(state.copyWith(image: event.image));
+  }
+    void _pendingFrom(
+      PendingFrom event, Emitter<EmployeeJobApplicationState> emit) {
+    emit(state.copyWith(status: FormStatus.pending));
   }
 
   void _nameChanged(

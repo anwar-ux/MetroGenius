@@ -7,18 +7,17 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.title,
     this.action,
+    required this.width,
   });
   String title;
   void Function()? action;
+  double? width;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.thirdColor,
-        borderRadius: BorderRadius.circular(8)
-      ),
+      decoration: BoxDecoration(color: AppColors.thirdColor, borderRadius: BorderRadius.circular(8)),
       height: 58,
-      width: double.infinity,
+      width: width,
       child: ElevatedButton(
         onPressed: action,
         style: ElevatedButton.styleFrom(
