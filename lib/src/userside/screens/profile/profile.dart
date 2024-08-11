@@ -18,7 +18,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const ProfileContainer(),
+           ProfileContainer(),
           ProfileSmallWidget(
             action: () => Navigator.of(context).push(createRoute(Address())),
             positionTop: 0.30,
@@ -50,7 +50,7 @@ class Profile extends StatelessWidget {
           Constants.spaceHight10,
           ProfileSmallWidget(
             action: () {
-              alertDialogCustom(
+              customAlertDialog(
                 context: context,
                 title: 'Logout',
                 message: 'Are you sure you want to log out?',

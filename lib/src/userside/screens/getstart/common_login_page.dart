@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
+import 'package:metrogeniusorg/src/employee/screens/login/employee_login.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/register_details_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/user_login.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
@@ -51,6 +52,7 @@ class CommonLoginPage extends StatelessWidget {
           Row(
             children: [
               CommonLoginContainer(
+                action: () => Navigator.of(context).push(createRoute(EmployeeLogin())),
                 image: 'assets/vecteezy_office-card-creative-icon-design_15054354.jpg',
                 hight: 154,
                 content: 'This is for the login of\nemployees of MetroGenius',

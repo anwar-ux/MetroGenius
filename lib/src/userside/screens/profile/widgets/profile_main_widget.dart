@@ -3,10 +3,15 @@ import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
 class ProfileContainer extends StatelessWidget {
-  const ProfileContainer({
+  ProfileContainer({
+    this.image,
+    this.name,
+    this.position,
     super.key,
   });
-
+  String? image;
+  String? name;
+  String? position;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,21 +26,23 @@ class ProfileContainer extends StatelessWidget {
               bottomRight: Radius.circular(50),
             ),
           ),
-          child:  const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
+                backgroundImage: image != null ? NetworkImage(image!) : null,
                 radius: 60,
+                child: image == null ? const Icon(Icons.person) : null,
               ),
               Constants.spaceHight10,
               Text(
-                "username",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    color: AppColors.lightGrey),
+                name ?? "username",
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 1, color: AppColors.lightGrey),
               ),
+              Text(
+                position??'',
+                style: const TextStyle(color: AppColors.lightGrey),
+              )
             ],
           ),
         ),

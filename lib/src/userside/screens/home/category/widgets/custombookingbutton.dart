@@ -18,7 +18,7 @@ void Function()? bookAction;
       right: 0,
       child: Container(
         color: AppColors.primaryColor,
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding:const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -11,12 +11,13 @@ class SubCategoryGrid extends StatelessWidget {
   final IconData? icon;
   final VoidCallback action;
   final String categoryId;
-
+  final String categoryName;
   const SubCategoryGrid({
     super.key,
     this.icon,
     required this.action,
     required this.categoryId,
+    required this.categoryName,
   });
 
   @override
@@ -57,7 +58,7 @@ class SubCategoryGrid extends StatelessWidget {
                       builder: (context, constraints) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(createRoute(SubcategoryView(data: doc)));
+                            Navigator.of(context).push(createRoute(SubcategoryView(data: doc,workType: categoryName,)));
                           },
                           child: Container(
                             decoration: BoxDecoration(

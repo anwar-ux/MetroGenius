@@ -8,10 +8,9 @@ import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
-Future<dynamic> bottomSheet(BuildContext context,dynamic data,String head) {
+Future<dynamic> bottomSheet(BuildContext context, dynamic data, String head,String workType) {
   DateTime? selectedDate;
   String? selectedTime;
-
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -57,18 +56,27 @@ Future<dynamic> bottomSheet(BuildContext context,dynamic data,String head) {
                   CustomButton(
                     action: () {
                       if (selectedDate != null && selectedTime != null) {
-                        Navigator.of(context).push(createRoute(BookingDetails(data: data, head: head)));
-                       
+                        Navigator.of(context).push(
+                          createRoute(
+                            BookingDetails(
+                              workType:workType ,
+                              data: data,
+                              head: head,
+                              date: selectedDate.toString(),
+                              time: selectedTime!,
+                            ),
+                          ),
+                        );
                       } else {
-                        // Show a message to select both date and time
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Please select both date and time'),
                           ),
                         );
                       }
                     },
-                   title:  'Confirm Booking', width: double.infinity,
+                    title: 'Confirm Booking',
+                    width: double.infinity,
                   ),
                 ],
               );

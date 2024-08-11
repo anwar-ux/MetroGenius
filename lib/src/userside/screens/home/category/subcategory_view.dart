@@ -11,8 +11,9 @@ import 'package:metrogeniusorg/utils/colors.dart';
 
 class SubcategoryView extends StatelessWidget {
   final dynamic data;
+  final String workType;
   final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
-  SubcategoryView({super.key, required this.data});
+  SubcategoryView({super.key, required this.data,required this.workType});
   String? value;
 
   @override
@@ -38,7 +39,7 @@ class SubcategoryView extends StatelessWidget {
             cartAction: () {},
             bookAction: () {
               if (value != null) {
-                bottomSheet(context,data,value!);
+                bottomSheet(context, data, value!,workType);
               } else {
                 showCustomSnackbar(
                   context,
@@ -49,7 +50,6 @@ class SubcategoryView extends StatelessWidget {
               }
             },
           ),
-         
         ],
       ),
     );

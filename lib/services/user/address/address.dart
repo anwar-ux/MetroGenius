@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Address {
-  static Future<bool> addAddress(addressInfo, id, userId) async {
+  static Future<bool> addAddress(addressInfo,userId,addressId) async {
     try {
-      await FirebaseFirestore.instance.collection('users').doc(userId).collection('addresses').add(addressInfo);
+      DocumentReference categoryDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+      await categoryDoc.collection('addresses').doc(addressId).set(addressInfo);
       return true;
     } catch (e) {
       return false;

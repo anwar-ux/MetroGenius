@@ -47,6 +47,8 @@ class UserSigninBloc extends Bloc<UserSigninEvent, UserSigninState> {
     }
   }
    void _userLoggedOut(UserLoggedOut event, Emitter<UserSigninState> emit) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     await FirebaseAuth.instance.signOut();
     emit(UserSigninState.initial());
   }

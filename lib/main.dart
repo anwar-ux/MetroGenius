@@ -5,12 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
+import 'package:metrogeniusorg/src/employee/screens/home/get_service_requestes/get_service_request_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/login/bloc/bloc/employee_login_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/profile/getemployee/get_emplyeee_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpassword/forgot_password_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/address.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/add_addres/add_address_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/get_address/get_address_bloc.dart';
@@ -53,6 +57,22 @@ class MyApp extends StatelessWidget {
          BlocProvider(
           create: (context) => GetAddressBloc(),
           child: Address(),
+        ),
+         BlocProvider(
+          create: (context) => EmployeeLoginBloc(),
+      
+        ),
+         BlocProvider(
+          create: (context) => GetEmployeeBloc(),
+      
+        ),
+         BlocProvider(
+          create: (context) => ServiceBookingBloc(),
+      
+        ),
+        BlocProvider(
+          create: (context) => GetServiceRequestBloc(),
+      
         ),
       ],
       child: MaterialApp(

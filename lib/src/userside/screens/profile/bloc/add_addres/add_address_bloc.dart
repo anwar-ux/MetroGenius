@@ -62,7 +62,7 @@ class AddAddressBloc extends Bloc<AddAddressEvent, AddAddressState> {
         pincode: state.pincode,
         area: state.area,
       );
-      final result = await Address.addAddress(addressDetails, genaratedId, userId);
+      final result = await Address.addAddress(addressDetails, userId,genaratedId);
       if (result) {
         emit(state.copyWith(status: FormStatus.success));
       } else {

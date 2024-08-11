@@ -1,8 +1,8 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:metrogeniusorg/services/user/address/address.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'get_address_event.dart';

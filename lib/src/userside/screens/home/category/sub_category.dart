@@ -16,6 +16,7 @@ class SubCategory extends StatelessWidget {
         body: SubCategoryGrid(
           action: () {},
           categoryId: categoryId,
+          categoryName: categoryName,
         ));
   }
 }

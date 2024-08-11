@@ -6,6 +6,7 @@ import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpasswo
 import 'package:metrogeniusorg/src/userside/screens/User_login/user_login.dart';
 import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/src/widgets/custom_textfield.dart';
+import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
 // ignore: must_be_immutable
@@ -18,7 +19,9 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state.status == FormStatus.success) {
+          showCustomSnackbar(context, 'Succes', 'Forget password Link sended to ${state.email}', Colors.green);
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -42,16 +45,11 @@ class ForgotPasswordPage extends StatelessWidget {
                   ),
                   const Text(
                     "Don't worry! It occurs. Please enter the email address linked with your account.",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 130, 130, 130),
-                        fontSize: 16,
-                        letterSpacing: 1),
+                    style: TextStyle(color: Color.fromARGB(255, 130, 130, 130), fontSize: 16, letterSpacing: 1),
                   ),
                   Constants.spaceHight35,
                   CustomTextfield(
-                    onChanged: (value) => context
-                        .read<ForgotPasswordBloc>()
-                        .add(EmailChanged(value)),
+                    onChanged: (value) => context.read<ForgotPasswordBloc>().add(EmailChanged(value)),
                     controller: emailController,
                     focusNode: emailFocusNode,
                     hint: 'Enter your email',
@@ -60,8 +58,7 @@ class ForgotPasswordPage extends StatelessWidget {
                         return 'Enter your email';
                       }
                       // Basic email validation regex
-                      final emailRegex = RegExp(
-                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                      final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                       if (!emailRegex.hasMatch(value)) {
                         return 'Enter a valid email';
                       }
@@ -83,21 +80,13 @@ class ForgotPasswordPage extends StatelessWidget {
                     children: [
                       const Text(
                         'Remember Password?',
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1),
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context)
-                            .push(createRoute(UserLogin())),
+                        onTap: () => Navigator.of(context).push(createRoute(UserLogin())),
                         child: const Text(
                           'Login',
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent,
-                              letterSpacing: 1),
+                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.blueAccent, letterSpacing: 1),
                         ),
                       ),
                     ],
