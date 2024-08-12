@@ -22,7 +22,7 @@ class ServiceBookingBloc extends Bloc<ServiceBookingEvent, ServiceBookingState> 
 
   void _addressChanged(AddressChanged event, Emitter<ServiceBookingState> emit) {
     print(event.address);
-    emit(state.copyWith(address: event.address));
+    emit(state.copyWith(address: event.address,userName: event.userName));
   }
 
   void _dateTimeChanged(DateTimeChanged event, Emitter<ServiceBookingState> emit) {
@@ -59,6 +59,7 @@ class ServiceBookingBloc extends Bloc<ServiceBookingEvent, ServiceBookingState> 
       print('Retrieved userId: $userId');
       final requestDetails = ServiceBooking.requestInfo(
         id: genaratedId,
+        userName: state.userName,
         workType: state.workType,
         userId: userId!,
         address: state.address,

@@ -10,12 +10,11 @@ sealed class GetServiceRequestState extends Equatable {
 final class GetRequestInitial
     extends GetServiceRequestState {}
 
-final class GetCategoryLoading
+final class GetRequestLoading
     extends GetServiceRequestState {}
 
 final class GetRequestLoaded extends GetServiceRequestState {
   final List<DocumentSnapshot> data;
-
   const GetRequestLoaded(this.data);
 }
 

@@ -9,6 +9,7 @@ class LoginEmployee {
 
       if (querySnapshot.docs.isNotEmpty) {
         final dynamic documentId = querySnapshot.docs.first.id;
+        
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('employeeId', documentId);
         return true;

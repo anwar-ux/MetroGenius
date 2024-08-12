@@ -67,7 +67,7 @@ class EmployeeJobApplicationBloc
     try {
         emit(state.copyWith(status: FormStatus.pending));
        final genaratedId = randomAlphaNumeric(6);
-      final emplyeeDetails = employeeJobapllication.employeeAplicationInfo(
+      final emplyeeDetails = employeeJobapllication.employeeApplicationInfo(
         id: genaratedId,
         email: state.email,
         name: state.name,
@@ -78,7 +78,7 @@ class EmployeeJobApplicationBloc
         image: state.image,
       );
       final result =
-          await employeeJobapllication.addEmployeeAplication(emplyeeDetails,genaratedId);
+          await employeeJobapllication.addEmployeeApplication(emplyeeDetails,genaratedId);
          
       if (result) {
         emit(state.copyWith(status: FormStatus.success));

@@ -10,6 +10,7 @@ Future<dynamic> customAlertDialog({
   void Function()? secondButtonAction,
 }) {
   return showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(

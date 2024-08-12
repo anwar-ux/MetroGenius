@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:metrogeniusorg/firebase_options.dart';
 import 'package:metrogeniusorg/services/employee/registation/employee_jobapllication.dart';
 import 'package:metrogeniusorg/services/user/registation/user_signup_auth.dart';
-import 'package:metrogeniusorg/src/employee/screens/home/get_service_requestes/get_service_request_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/home/bloc/employee_actions/employee_actions_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/home/bloc/get_service_requestes/get_service_request_bloc.dart';
+import 'package:metrogeniusorg/src/employee/screens/home/employee_home.dart';
 import 'package:metrogeniusorg/src/employee/screens/login/bloc/bloc/employee_login_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/profile/getemployee/get_emplyeee_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_application_bloc.dart';
@@ -56,23 +58,23 @@ class MyApp extends StatelessWidget {
         ),
          BlocProvider(
           create: (context) => GetAddressBloc(),
-          child: Address(),
+          child:const Address(),
         ),
          BlocProvider(
           create: (context) => EmployeeLoginBloc(),
-      
         ),
          BlocProvider(
           create: (context) => GetEmployeeBloc(),
-      
         ),
          BlocProvider(
           create: (context) => ServiceBookingBloc(),
-      
         ),
         BlocProvider(
           create: (context) => GetServiceRequestBloc(),
-      
+         child: EmployeeHome(),
+        ),
+         BlocProvider(
+          create: (context) => EmployeeActionsBloc(),
         ),
       ],
       child: MaterialApp(

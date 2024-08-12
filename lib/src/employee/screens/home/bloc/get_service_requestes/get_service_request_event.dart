@@ -10,7 +10,12 @@ sealed class GetServiceRequestEvent extends Equatable {
 class FetchRequestData extends GetServiceRequestEvent {
   
 }
-
+class FetchCommitedRequestData extends GetServiceRequestEvent {
+  
+}
+class FetchCompletedRequestData extends GetServiceRequestEvent {
+  
+}
 class DataRequestFetched extends GetServiceRequestEvent {
   final List<DocumentSnapshot> data;
   const DataRequestFetched(this.data);

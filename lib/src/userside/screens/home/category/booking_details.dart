@@ -34,7 +34,7 @@ class BookingDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat('MMMM d, EEEE').format(DateTime.parse(date));
-    final String dateTime = '$formattedDate -- $time';
+    final String dateTime = 'Scheduled Date : $formattedDate\nScheduled Time : $time';
 
     // Trigger Bloc events once
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -111,12 +111,16 @@ class BookingDetails extends StatelessWidget {
                   _titleAndPrice(title: 'Grand Total', price: state.totalPrice.toString()),
                   Constants.spaceHight35,
                   CustomButton(
-                    title: 'Pay',
+                    title: 'Pay ₹${state.totalPrice}',
                     width: double.infinity,
                     action: () {
                       if (state.address.isNotEmpty) {
                         context.read<ServiceBookingBloc>().add(FormSubmit());
-                        Navigator.of(context).pushReplacement(createRoute(UserCategorys()));
+                     Navigator.pushAndRemoveUntil(
+  context,
+  MaterialPageRoute(builder: (context) => UserCategorys()),
+  (Route<dynamic> route) => false, // This predicate removes all the previous routes
+);
                       } else {
                         showCustomSnackbar(context, 'Select Address', 'One addres select for providing service', Colors.red);
                       }

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/services/employee/login.dart/login.dart';
 
@@ -7,7 +6,7 @@ part 'employee_login_event.dart';
 part 'employee_login_state.dart';
 
 class EmployeeLoginBloc extends Bloc<EmployeeLoginEvent, EmployeeLoginState> {
-  EmployeeLoginBloc() : super(EmployeeLoginState()) {
+  EmployeeLoginBloc() : super(const EmployeeLoginState()) {
      on<EmailChanged>(_emailChanged);
     on<PasswordChanged>(_passwordChanged);
     on<FormSubmit>(_formSubmit);
@@ -45,7 +44,6 @@ class EmployeeLoginBloc extends Bloc<EmployeeLoginEvent, EmployeeLoginState> {
     }
   }
    void _userLoggedOut(UserLoggedOut event, Emitter<EmployeeLoginState> emit) async {
-    await FirebaseAuth.instance.signOut();
     emit(EmployeeLoginState.initial());
   }
 }

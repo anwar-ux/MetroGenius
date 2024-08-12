@@ -2,20 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:metrogeniusorg/src/employee/screens/home/bloc/employee_actions/employee_actions_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/home/bloc/get_service_requestes/get_service_request_bloc.dart';
-import 'package:metrogeniusorg/src/employee/screens/home/widgets/custom_worker_button.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
-class CommitedServices extends StatelessWidget {
-  const CommitedServices({super.key});
+class CompletedServices extends StatelessWidget {
+  const CompletedServices({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GetServiceRequestBloc()..add(FetchCommitedRequestData()),
+        create: (context) => GetServiceRequestBloc()..add(FetchCompletedRequestData()),
         child: BlocConsumer<GetServiceRequestBloc, GetServiceRequestState>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -119,12 +117,6 @@ class CommitedServices extends StatelessWidget {
                                       Text('Address : ${doc['Address']}'),
                                       Text('${doc['DateTime']}'),
                                       Constants.spaceHight10,
-                                      customWorkerButton(
-                                          doc: doc,
-                                          buttonName: 'Completed',
-                                          action: () {
-                                            context.read<EmployeeActionsBloc>().add(CompletedClicked(doc['Id']));
-                                          })
                                     ],
                                   ),
                                 ),

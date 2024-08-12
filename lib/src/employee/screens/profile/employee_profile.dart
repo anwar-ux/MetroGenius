@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/services/employee/getemployee/employee.dart';
+import 'package:metrogeniusorg/src/employee/screens/login/bloc/bloc/employee_login_bloc.dart';
 import 'package:metrogeniusorg/src/employee/screens/profile/getemployee/get_emplyeee_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/widgets/profil_small_widget.dart';
@@ -74,6 +75,8 @@ class EmployeeProfile extends StatelessWidget {
                         },
                         secondButtonAction: () {
                           EmployeeService.employeeLogout();
+                          
+                        context.read<EmployeeLoginBloc>().add(UserLoggedOut());
                           Navigator.of(context).pushReplacement(createRoute(const CommonLoginPage()));
                         },
                       );

@@ -14,6 +14,7 @@ class ServiceBooking {
 
   static Map<String, dynamic> requestInfo({
     required String userId,
+    required String userName,
     required String workType,
     required String id,
     required String address,
@@ -36,6 +37,7 @@ class ServiceBooking {
       'DiscountPrice': discountPrice,
       'WorkerId': workerId,
       'RequestStatus': requestStatus,
+      'UserName':userName,
       'Discription': discription,
       'CreatAt': FieldValue.serverTimestamp()
     };

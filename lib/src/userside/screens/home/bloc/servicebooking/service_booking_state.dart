@@ -16,12 +16,14 @@ class ServiceBookingState {
     this.discountPrice = 0,
     this.creatAt = '',
     this.discription = '',
-    this.workType='',
+    this.userName='',
+    this.workType = '',
     this.userId = '',
     this.requestStatus = RequestStatus.pending,
   });
 
   final String address;
+  final String userName;
   final String discription;
   final String userId;
   final String creatAt;
@@ -36,6 +38,7 @@ class ServiceBookingState {
 
   ServiceBookingState copyWith({
     String? address,
+    String? userName,
     String? workType,
     int? totalPrice,
     String? dateTime,
@@ -49,7 +52,8 @@ class ServiceBookingState {
   }) {
     return ServiceBookingState(
         address: address ?? this.address,
-        workType: workType??this.workType,
+        workType: workType ?? this.workType,
+        userName: userName??this.userName,
         userId: userId ?? this.userId,
         discountPrice: discountPrice ?? this.discountPrice,
         totalPrice: totalPrice ?? this.totalPrice,

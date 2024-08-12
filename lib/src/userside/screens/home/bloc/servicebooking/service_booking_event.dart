@@ -3,8 +3,9 @@ part of 'service_booking_bloc.dart';
 sealed class ServiceBookingEvent {}
 
 final class AddressChanged extends ServiceBookingEvent {
-  AddressChanged(this.address);
+  AddressChanged(this.address,this.userName);
   final String address;
+  final String userName;
 }
 
 final class DateTimeChanged extends ServiceBookingEvent {
@@ -23,7 +24,7 @@ final class DiscriptionChanged extends ServiceBookingEvent {
 }
 
 final class ServiceTitleChanged extends ServiceBookingEvent {
-  ServiceTitleChanged(this.serviceTitle,this.workType);
+  ServiceTitleChanged(this.serviceTitle, this.workType);
   final String serviceTitle;
   final String workType;
 }

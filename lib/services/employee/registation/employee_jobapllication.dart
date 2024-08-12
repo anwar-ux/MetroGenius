@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EmployeeJobapllication {
-  Future<bool> addEmployeeAplication(employeeAplicationInfo,id) async {
+  Future<bool> addEmployeeApplication(employeeApplicationInfo,id) async {
     try {
      
       await FirebaseFirestore.instance
-          .collection("EmployeeAplications")
+          .collection("EmployeeApplications")
           .doc(id)
-          .set(employeeAplicationInfo);
+          .set(employeeApplicationInfo);
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Map<String, dynamic> employeeAplicationInfo({
+  Map<String, dynamic> employeeApplicationInfo({
     required String id,
     required String email,
     required String name,
