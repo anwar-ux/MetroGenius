@@ -7,7 +7,6 @@ class ServiceBooking {
       await categoryDoc.collection('requestedServices').doc(requestId).set(requestInfo);
       return true;
     } catch (e) {
-      print(e.toString());
       return false;
     }
   }

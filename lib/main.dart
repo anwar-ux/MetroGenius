@@ -17,8 +17,9 @@ import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/u
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/profile/address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/address/address.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/add_addres/add_address_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/bloc/add_user_details/add_user_details_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/get_address/get_address_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
@@ -75,6 +76,9 @@ class MyApp extends StatelessWidget {
         ),
          BlocProvider(
           create: (context) => EmployeeActionsBloc(),
+        ),
+         BlocProvider(
+          create: (context) => AddUserDetailsBloc(),
         ),
       ],
       child: MaterialApp(

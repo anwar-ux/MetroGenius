@@ -20,7 +20,8 @@ class ForgotPasswordPage extends StatelessWidget {
     return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         if (state.status == FormStatus.success) {
-          showCustomSnackbar(context, 'Succes', 'Forget password Link sended to ${state.email}', Colors.green);
+          Navigator.of(context).push(createRoute(UserLogin()));
+          showCustomSnackbar(context, 'Success', 'Forget password Link sended to ${state.email}', Colors.green);
         }
       },
       builder: (context, state) {
@@ -71,7 +72,7 @@ class ForgotPasswordPage extends StatelessWidget {
                     title: 'Submit',
                     action: () {
                       context.read<ForgotPasswordBloc>().add(FormSubmit());
-                      Navigator.pop(context);
+                     
                     },
                   ),
                   const Expanded(child: SizedBox()),

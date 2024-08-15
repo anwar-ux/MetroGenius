@@ -15,24 +15,7 @@ class FbGoogleLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Container(
-          height: 65,
-          width: 120,
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color.fromARGB(255, 214, 214, 214)),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-              child: Image.network(
-            'https://clipground.com/images/facebook-icon-logo-8.png',
-            height: 45,
-            width: 45,
-          )),
-        ),
-        GestureDetector(
+    return  GestureDetector(
           onTap: () async {
             buildShowDialog(context);
             User? user = await GoogleAuthService.signInWithGoogle();
@@ -49,22 +32,25 @@ class FbGoogleLogin extends StatelessWidget {
             }
           },
           child: Container(
-            height: 65,
-            width: 120,
+            height: 45,
+            width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: const Color.fromARGB(255, 214, 214, 214)),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: Center(
-              child: Image.network(
-                'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png',
-                height: 45,
-                width: 45,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Image.network(
+                    'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png',
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+                Text('Signin with google',style: TextStyle(fontWeight: FontWeight.bold),)
+              ],
             ),
-          ),
-        )
-      ],
-    );
+    ));
   }
 }

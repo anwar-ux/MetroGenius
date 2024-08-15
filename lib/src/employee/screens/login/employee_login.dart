@@ -25,14 +25,11 @@ class EmployeeLogin extends StatelessWidget {
           listener: (context, state) {
             if (state.status == FormStatus.success) {
               showCustomSnackbar(context, 'Succes', 'Login Successfull', Colors.green);
-           
             } else if (state.status == FormStatus.error) {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.errorMsg!)),
               );
-            } else if (state.status == FormStatus.pending) {
-              buildShowDialog(context);
             }
           },
           builder: (context, state) {

@@ -1,12 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/category/categorys.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/category/sub_category.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/category/subcategory_view.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/address_selector.dart';
 import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
@@ -36,7 +32,7 @@ class BookingDetails extends StatelessWidget {
     final formattedDate = DateFormat('MMMM d, EEEE').format(DateTime.parse(date));
     final String dateTime = 'Scheduled Date : $formattedDate\nScheduled Time : $time';
 
-    // Trigger Bloc events once
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ServiceBookingBloc>().add(DateTimeChanged(dateTime));
       context.read<ServiceBookingBloc>().add(DiscriptionChanged(head));

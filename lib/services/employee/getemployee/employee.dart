@@ -58,7 +58,7 @@ class EmployeeService {
           .where('RequestStatus', isEqualTo: RequestStatus.accepted.toString())
           .snapshots();
     } else {
-      yield* const Stream<QuerySnapshot>.empty(); // Handle null employeeId case
+      yield* const Stream<QuerySnapshot>.empty();
     }
   }
 
@@ -67,9 +67,13 @@ class EmployeeService {
     final id = prefs.getString('employeeId');
 
     if (id != null) {
-      yield* FirebaseFirestore.instance.collectionGroup('requestedServices').where('RequestStatus', isEqualTo: RequestStatus.completed.toString()).snapshots();
+      yield* FirebaseFirestore.instance
+          .collectionGroup('requestedServices')
+          .where('WorkerId', isEqualTo: id)
+          .where('RequestStatus', isEqualTo: RequestStatus.completed.toString())
+          .snapshots();
     } else {
-      yield* Stream<QuerySnapshot>.empty();
+      yield* const Stream<QuerySnapshot>.empty();
     }
   }
 

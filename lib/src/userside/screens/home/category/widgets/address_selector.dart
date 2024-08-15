@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/profile/add_address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/address/add_address.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/get_address/get_address_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 

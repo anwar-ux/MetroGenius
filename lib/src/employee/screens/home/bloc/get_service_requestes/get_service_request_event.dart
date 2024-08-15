@@ -7,15 +7,11 @@ sealed class GetServiceRequestEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchRequestData extends GetServiceRequestEvent {
-  
-}
-class FetchCommitedRequestData extends GetServiceRequestEvent {
-  
-}
-class FetchCompletedRequestData extends GetServiceRequestEvent {
-  
-}
+class FetchRequestData extends GetServiceRequestEvent {}
+
+class FetchCommitedRequestData extends GetServiceRequestEvent {}
+
+class FetchCompletedRequestData extends GetServiceRequestEvent {}
 class DataRequestFetched extends GetServiceRequestEvent {
   final List<DocumentSnapshot> data;
   const DataRequestFetched(this.data);

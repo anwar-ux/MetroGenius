@@ -7,7 +7,7 @@ class TimeSelector extends StatefulWidget {
 
   const TimeSelector({
     super.key,
-    required this.onTimeSelected,
+    required this.onTimeSelected, DateTime? selectedDate, 
   });
 
   @override

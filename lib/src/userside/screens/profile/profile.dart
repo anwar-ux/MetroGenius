@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
 import 'package:metrogeniusorg/services/user/registation/google_auth_service.dart';
+import 'package:metrogeniusorg/services/user/user_details/user_details.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
-import 'package:metrogeniusorg/src/userside/screens/profile/address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/address/address.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/bloc/get_user_details/get_user_details_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/profile/user_details/user_details.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/widgets/profil_small_widget.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/widgets/profile_main_widget.dart';
 import 'package:metrogeniusorg/src/widgets/alertdialog_custom.dart';
@@ -18,9 +21,23 @@ class Profile extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-           ProfileContainer(),
+          BlocProvider(
+            create: (context) => GetUserDetailsBloc()..add(FetchUserData()),
+            child: BlocBuilder<GetUserDetailsBloc, GetUserDetailsState>(
+              builder: (context, state) {
+                if (state is GetUserDeatailsLoaded) {
+                  final data=state.data.first;
+                  return ProfileContainer(
+                    image: data['Image']??null,
+                    name: data['Name']??null,
+                  );
+                }
+                return ProfileContainer();
+              },
+            ),
+          ),
           ProfileSmallWidget(
-            action: () => Navigator.of(context).push(createRoute(Address())),
+            action: () => Navigator.of(context).push(createRoute(const Address())),
             positionTop: 0.30,
             title: 'Address',
             sub: 'chundattu(H),cheruvattoor,kothamang....',
@@ -28,6 +45,7 @@ class Profile extends StatelessWidget {
           ),
           Constants.spaceHight10,
           ProfileSmallWidget(
+            action: () => Navigator.of(context).push(createRoute( UserDetailss())),
             positionTop: 0.425,
             title: 'User details',
             sub: 'Edit your details',
@@ -62,8 +80,7 @@ class Profile extends StatelessWidget {
                 secondButtonAction: () {
                   context.read<UserSigninBloc>().add(UserLoggedOut());
                   GoogleAuthService.signOutWithGoogle();
-                  Navigator.of(context)
-                      .pushReplacement(createRoute(const CommonLoginPage()));
+                  Navigator.of(context).pushReplacement(createRoute(const CommonLoginPage()));
                 },
               );
             },

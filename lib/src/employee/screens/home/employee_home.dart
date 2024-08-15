@@ -11,6 +11,7 @@ class EmployeeHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
+      initialIndex: 1,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(120),

@@ -27,51 +27,40 @@ class CommitedServices extends StatelessWidget {
             if (state is GetRequestLoaded) {
               final data = state.data;
 
-              final today = DateTime.now();
-              final yesterday = today.subtract(const Duration(days: 1));
-              final todayRequests = [];
-              final yesterdayRequests = [];
-              final earlierRequests = [];
+              // Group requests by date
+              final Map<String, List<DocumentSnapshot>> groupedData = {};
 
               for (var doc in data) {
                 final Timestamp timestamp = doc['CreatAt'];
                 final DateTime dateTime = timestamp.toDate();
-                if (DateFormat('yyyy-MM-dd').format(dateTime) == DateFormat('yyyy-MM-dd').format(today)) {
-                  todayRequests.add(doc);
-                } else if (DateFormat('yyyy-MM-dd').format(dateTime) == DateFormat('yyyy-MM-dd').format(yesterday)) {
-                  yesterdayRequests.add(doc);
-                } else {
-                  earlierRequests.add(doc);
-                }
-              }
+                final String formattedDate = DateFormat('dd-MM-yyyy EEEE').format(dateTime);
 
-              final groupedData = [
-                {'label': 'Today', 'data': todayRequests},
-                {'label': 'Yesterday', 'data': yesterdayRequests},
-                {'label': 'Earlier', 'data': earlierRequests},
-              ];
+                if (!groupedData.containsKey(formattedDate)) {
+                  groupedData[formattedDate] = [];
+                }
+                groupedData[formattedDate]?.add(doc);
+              }
 
               return ListView.builder(
                 itemCount: groupedData.length,
                 itemBuilder: (context, groupIndex) {
-                  final group = groupedData[groupIndex];
-                  final label = group['label'];
-                  final requests = group['data'] as List;
+                  final String date = groupedData.keys.elementAt(groupIndex);
+                  final List<DocumentSnapshot> requests = groupedData[date]!;
 
-                  if (requests.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            label.toString(),
-                            style: const TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10,bottom: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              date, // Display the date as the header
+                              style: const TextStyle(fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        ),
                       ),
                       ListView.builder(
                         shrinkWrap: true,
@@ -124,7 +113,7 @@ class CommitedServices extends StatelessWidget {
                                           buttonName: 'Completed',
                                           action: () {
                                             context.read<EmployeeActionsBloc>().add(CompletedClicked(doc['Id']));
-                                          })
+                                          }),   
                                     ],
                                   ),
                                 ),
