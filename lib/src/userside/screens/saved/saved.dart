@@ -1,47 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrogeniusorg/animation/route_animation.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/bloc/getsubcategory/get_sub_category_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/savedservices/saved_services_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/category/subcategory_view.dart';
+import 'package:metrogeniusorg/src/widgets/app_bar.dart';
 import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
 
-class SubCategoryGrid extends StatelessWidget {
-  final IconData? icon;
-  final VoidCallback action;
-  final String categoryId;
-  final String categoryName;
-  const SubCategoryGrid({
-    super.key,
-    this.icon,
-    required this.action,
-    required this.categoryId,
-    required this.categoryName,
-  });
+class Saved extends StatelessWidget {
+  const Saved({super.key,});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetSubCategoryBloc()..add(FetchSubCategoryData(categoryId)),
+    return Scaffold(
+      appBar: customAppbar(title: 'Saved'),
+      body:BlocProvider(
+      create: (context) => SavedServicesBloc()..add(FetchSavedServiceData()),
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: BlocConsumer<GetSubCategoryBloc, GetSubCategoryState>(
+        child: BlocConsumer<SavedServicesBloc, SavedServicesState>(
           listener: (context, state) {
-            if (state is GetSubCategoryFailed) {
+            if (state is SavedServicesFailed) {
               showCustomSnackbar(context, 'Failed', state.errorMsg, Colors.red);
             }
           },
           builder: (context, state) {
-            if (state is GetSubCategoryLoading) {
+            if (state is SavedServicesLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is GetSubCategoryLoaded) {
+            } else if (state is SavedServicesLoaded) {
               final itemCount = state.data.length;
               if (itemCount == 0) {
                 return const Center(
-                  child: Text('Coming soon..'),
+                  child: Text('No saved services'),
                 );
               } else {
                 return GridView.builder(
@@ -58,7 +51,7 @@ class SubCategoryGrid extends StatelessWidget {
                       builder: (context, constraints) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(createRoute(SubcategoryView(data: doc,workType: categoryName,)));
+                            Navigator.of(context).push(createRoute(SubcategoryView(data: doc,workType: doc['Name'],)));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -148,6 +141,7 @@ class SubCategoryGrid extends StatelessWidget {
           },
         ),
       ),
+    )
     );
   }
 }

@@ -3,26 +3,26 @@ import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:metrogeniusorg/src/userside/screens/booking/booking.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/home.dart';
-import 'package:metrogeniusorg/src/userside/screens/payments/payment_history.dart';
+import 'package:metrogeniusorg/src/userside/screens/saved/saved.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/profile.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
-class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+class UserBottomNavigation extends StatefulWidget {
+  const UserBottomNavigation({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<BottomNavigation> {
+class _HomeScreenState extends State<UserBottomNavigation> {
   final ValueNotifier<bool> bottomNavBarVisible = ValueNotifier(true);
 
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
     const Booking(),
-    const PaymentHistory(),
+    const Saved(),
     const Profile(),
   ];
 
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<BottomNavigation> {
           builder: (context, isVisible, child) {
             return AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isVisible ? kBottomNavigationBarHeight + 22 : 0,
+              height: isVisible ? kBottomNavigationBarHeight + 20 : 0,
               child: isVisible ? child : const SizedBox.shrink(),
             );
           },
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<BottomNavigation> {
             padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(30),
                 color: AppColors.seconderyColor,
                 boxShadow: [
                   BoxShadow(
@@ -78,10 +78,10 @@ class _HomeScreenState extends State<BottomNavigation> {
                 gap: 8,
                 color: AppColors.thirdColor,
                 hoverColor: Colors.green,
-                padding: const EdgeInsets.all(14),
+                padding: const EdgeInsets.all(18),
                 tabs: const [
                   GButton(
-                    icon: Icons.home_rounded,
+                    icon: Icons.home_outlined,
                     text: 'Home',
                   ),
                   GButton(
@@ -89,8 +89,8 @@ class _HomeScreenState extends State<BottomNavigation> {
                     text: 'Booking',
                   ),
                   GButton(
-                    icon: Icons.payment,
-                    text: 'payments',
+                    icon: Icons.favorite_border,
+                    text: 'Saved',
                   ),
                   GButton(
                     icon: Icons.person_2_outlined,

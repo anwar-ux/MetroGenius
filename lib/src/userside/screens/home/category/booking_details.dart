@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/home/category/categorys.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/address_selector.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/category/widgets/payment_bottomsheet.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/home.dart';
 import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/src/widgets/snak_bar.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 import 'package:metrogeniusorg/utils/constants.dart';
+import 'package:upi_india/upi_app.dart';
+import 'package:upi_india/upi_india.dart';
 
 class BookingDetails extends StatelessWidget {
   final dynamic data;
@@ -16,7 +19,7 @@ class BookingDetails extends StatelessWidget {
   final String time;
   final String workType;
   final TextEditingController dateController = TextEditingController();
-  final int serviceFee = 50;
+  final int serviceFee =  50;
 
   BookingDetails({
     super.key,
@@ -29,16 +32,13 @@ class BookingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat('MMMM d, EEEE').format(DateTime.parse(date));
-    final String dateTime = 'Scheduled Date : $formattedDate\nScheduled Time : $time';
-
+    final formattedDate = DateFormat('dd MMM').format(DateTime.parse(date));
+    final String dateTime = '$time, $formattedDate';
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ServiceBookingBloc>().add(DateTimeChanged(dateTime));
       context.read<ServiceBookingBloc>().add(DiscriptionChanged(head));
-      context.read<ServiceBookingBloc>().add(ServiceTitleChanged(
-            data['Name'],workType
-          ));
+      context.read<ServiceBookingBloc>().add(ServiceTitleChanged(data['Name'], workType));
       context.read<ServiceBookingBloc>().add(TotalPriceChanged(data['Price'] + serviceFee));
     });
 
@@ -109,16 +109,11 @@ class BookingDetails extends StatelessWidget {
                   CustomButton(
                     title: 'Pay ₹${state.totalPrice}',
                     width: double.infinity,
-                    action: () {
+                    action: ()async {
                       if (state.address.isNotEmpty) {
-                        context.read<ServiceBookingBloc>().add(FormSubmit());
-                     Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(builder: (context) => UserCategorys()),
-  (Route<dynamic> route) => false, // This predicate removes all the previous routes
-);
+                        PaymentBottomSheet.showPaymentOptions(context: context, receiverUpiId: 'anwarcr7432-1@oksbi', amount: state.totalPrice.toDouble(), transactionNote: '');    
                       } else {
-                        showCustomSnackbar(context, 'Select Address', 'One addres select for providing service', Colors.red);
+                        showCustomSnackbar(context, 'Select Address', 'Select one addrres for providing service', Colors.red);
                       }
                     },
                   ),

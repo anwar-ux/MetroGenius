@@ -37,7 +37,7 @@ class UserLogin extends StatelessWidget {
         listener: (context, state) {
           if (state.status == FormStatus.success) {
             showCustomSnackbar(context, 'Success', 'Login as \n${state.email}', Colors.green);
-            Navigator.of(context).pushReplacement(createRoute(const BottomNavigation()));
+            Navigator.of(context).pushReplacement(createRoute(const UserBottomNavigation()));
           } else if (state.status == FormStatus.error) {
             showCustomSnackbar(context, 'Failed', 'invalid email or password', Colors.red);
           } else if (state.status == FormStatus.pending) {

@@ -51,7 +51,7 @@ class _EmployeeBottomNavigationState extends State<EmployeeBottomNavigation> {
           builder: (context, isVisible, child) {
             return AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isVisible ? kBottomNavigationBarHeight + 22 : 0,
+              height: isVisible ? kBottomNavigationBarHeight + 18 : 0,
               child: isVisible ? child : const SizedBox.shrink(),
             );
           },
@@ -59,7 +59,7 @@ class _EmployeeBottomNavigationState extends State<EmployeeBottomNavigation> {
             padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(28),
+                borderRadius: BorderRadius.circular(30),
                 color: AppColors.seconderyColor,
                 boxShadow: [
                   BoxShadow(
@@ -77,7 +77,7 @@ class _EmployeeBottomNavigationState extends State<EmployeeBottomNavigation> {
                 gap: 8,
                 color: AppColors.thirdColor,
                 hoverColor: Colors.green,
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(18),
                 tabs: const [
                   GButton(
                     icon: Icons.home_rounded,

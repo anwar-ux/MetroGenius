@@ -3,13 +3,10 @@ import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
 class CustomBookingButton extends StatelessWidget {
-   CustomBookingButton({
-    super.key,
-    this.bookAction,
-    this.cartAction
-  });
-void Function()? cartAction;
-void Function()? bookAction;
+  CustomBookingButton({super.key, this.bookAction, this.cartAction,this.saveName});
+  void Function()? cartAction;
+  void Function()? bookAction;
+  String? saveName;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -18,12 +15,12 @@ void Function()? bookAction;
       right: 0,
       child: Container(
         color: AppColors.primaryColor,
-        padding:const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomButton(
-              title: 'Cart',
+              title: saveName!,
               width: MediaQuery.of(context).size.width * 0.45,
               action: cartAction,
             ),

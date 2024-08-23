@@ -15,6 +15,7 @@ class EmployeeSchedule extends StatefulWidget {
 class _EmployeeScheduleState extends State<EmployeeSchedule> {
   DateTime _selectedDate = DateTime.now(); // Initialize to today's date
   final Set<DateTime> bookedSlots = {};
+  List<Map<String, dynamic>> todayServices = [];
 
   List<String> _generateTimeSlots() {
     List<String> timeSlots = [];
@@ -53,16 +54,26 @@ class _EmployeeScheduleState extends State<EmployeeSchedule> {
           listener: (context, state) {
             if (state is GetRequestLoaded) {
               bookedSlots.clear();
+              todayServices.clear();
+
               for (var doc in state.data) {
                 final scheduledString = doc['DateTime'] as String;
                 try {
                   final bookedSlot = parseScheduledDateTime(scheduledString);
                   bookedSlots.add(bookedSlot);
+
+                  // Filter services for today
+                  if (bookedSlot.year == DateTime.now().year &&
+                      bookedSlot.month == DateTime.now().month &&
+                      bookedSlot.day == DateTime.now().day) {
+                    todayServices.add(doc as Map<String, dynamic>);
+                  }
                 } catch (e) {
                   print('Error parsing date: $e');
                 }
               }
-              // Update the state to reflect any changes in booked slots
+
+              // Update the state to reflect any changes in booked slots and today's services
               setState(() {});
             }
           },
@@ -175,6 +186,76 @@ class _EmployeeScheduleState extends State<EmployeeSchedule> {
                         itemCount: timeSlots.length,
                       ),
                     ),
+                    const Divider(
+                      color: AppColors.lightGrey,
+                    ),
+                    Constants.spaceHight10,
+                    const Text(
+                      "Today's Upcoming Services:",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Constants.spaceHight10,
+                    Expanded(
+                      child: todayServices.isNotEmpty
+                          ? ListView.builder(
+                            scrollDirection:Axis.horizontal,
+                              itemCount: todayServices.length,
+                              itemBuilder: (context, index) {
+                                final doc = todayServices[index];
+                                final time = parseScheduledDateTime(doc['DateTime']);
+
+                                return Container(
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.lightGrey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 5),
+                                        blurStyle: BlurStyle.normal,
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ListTile(
+                                      contentPadding: const EdgeInsets.all(0),
+                                      title: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(doc['UserName']),
+                                          Text(
+                                            DateFormat('hh:mm a').format(time),
+                                            style: const TextStyle(fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Service : ${doc['ServiceTitle']} | ${doc['Discription']}',
+                                          ),
+                                          Text('Address : ${doc['Address']}'),
+                                          Text('${doc['DateTime']}'),
+                                          Constants.spaceHight10,
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
+                          : const Center(
+                              child: Text(
+                                "No upcoming services for today.",
+                                style: TextStyle(color: AppColors.lightGrey),
+                              ),
+                            ),
+                    ),
                   ],
                 ),
               );
@@ -207,8 +288,8 @@ DateTime parseScheduledDateTime(String combinedString) {
       throw FormatException('Invalid format: date or time string is null');
     }
 
-    final dateFormat = DateFormat('MMMM d'); // Format for "August 14"
-    final timeFormat = DateFormat('hh:mm a'); // Format for "09:00 AM"
+    final dateFormat = DateFormat('MMMM d'); 
+    final timeFormat = DateFormat('hh:mm a'); 
 
     final date = dateFormat.parse(dateString);
     final time = timeFormat.parse(timeString);

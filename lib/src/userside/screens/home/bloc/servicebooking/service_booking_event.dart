@@ -22,6 +22,10 @@ final class DiscriptionChanged extends ServiceBookingEvent {
   DiscriptionChanged(this.discription);
   final String discription;
 }
+final class PaymentTypeChanged extends ServiceBookingEvent {
+  PaymentTypeChanged(this.paymentType);
+  final String paymentType;
+}
 
 final class ServiceTitleChanged extends ServiceBookingEvent {
   ServiceTitleChanged(this.serviceTitle, this.workType);

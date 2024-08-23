@@ -14,8 +14,12 @@ import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_a
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpassword/forgot_password_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_and_review_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/getrequests/bloc/get_user_request_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/payment/payment_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/savedservices/saved_services_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/address/address.dart';
 import 'package:metrogeniusorg/src/userside/screens/profile/bloc/add_addres/add_address_bloc.dart';
@@ -33,8 +37,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -72,13 +74,25 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetServiceRequestBloc(),
-         child: EmployeeHome(),
+         child:const EmployeeHome(),
         ),
          BlocProvider(
           create: (context) => EmployeeActionsBloc(),
         ),
          BlocProvider(
           create: (context) => AddUserDetailsBloc(),
+        ),
+         BlocProvider(
+          create: (context) => GetUserRequestBloc(),
+        ),
+         BlocProvider(
+          create: (context) => SavedServicesBloc(),
+        ),
+         BlocProvider(
+          create: (context) => PaymentBloc(),
+        ),
+        BlocProvider(
+          create: (context) => RatingAndReviewBloc(),
         ),
       ],
       child: MaterialApp(

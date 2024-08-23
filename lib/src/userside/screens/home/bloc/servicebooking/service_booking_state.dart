@@ -16,15 +16,17 @@ class ServiceBookingState {
     this.discountPrice = 0,
     this.creatAt = '',
     this.discription = '',
-    this.userName='',
+    this.userName = '',
     this.workType = '',
     this.userId = '',
+    this.paymentType = '',
     this.requestStatus = RequestStatus.pending,
   });
 
   final String address;
   final String userName;
   final String discription;
+  final String paymentType;
   final String userId;
   final String creatAt;
   final String serviceTitle;
@@ -48,12 +50,14 @@ class ServiceBookingState {
     String? creatAt,
     FormStatus? status,
     String? userId,
+    String?paymentType,
     String? errorMsg,
   }) {
     return ServiceBookingState(
         address: address ?? this.address,
+        paymentType: paymentType??this.paymentType,
         workType: workType ?? this.workType,
-        userName: userName??this.userName,
+        userName: userName ?? this.userName,
         userId: userId ?? this.userId,
         discountPrice: discountPrice ?? this.discountPrice,
         totalPrice: totalPrice ?? this.totalPrice,

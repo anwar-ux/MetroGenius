@@ -23,15 +23,20 @@ class _UserCheckBoxesState extends State<UserCheckBoxes> {
   @override
   void initState() {
     super.initState();
+    // Initialize checkboxes and filter only those that are true
     checkboxes = Map<String, bool>.from(widget.data['Checkboxes']);
     trueCheckboxes = checkboxes.keys.where((key) => checkboxes[key] == true).toList();
+    // Reset all checkboxes to false (unchecked)
+    for (var key in trueCheckboxes) {
+      checkboxes[key] = false;
+    }
   }
 
   void _onCheckboxChanged(String key, bool? value) {
     setState(() {
-      checkboxes.updateAll((k, v) => false); // Uncheck all checkboxes
-      checkboxes[key] = value ?? false; // Set the selected checkbox
-      widget.onChanged(value == true ? key : null); // Pass the selected key back to parent
+      checkboxes.updateAll((k, v) => false); 
+      checkboxes[key] = value ?? false; 
+      widget.onChanged(value == true ? key : null);
     });
   }
 

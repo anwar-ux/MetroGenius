@@ -24,7 +24,7 @@ class FbGoogleLogin extends StatelessWidget {
               final prefs = await SharedPreferences.getInstance();
               await prefs.setString('userId', user.uid);
               print(user.uid);
-              Navigator.of(context).pushReplacement(createRoute(const BottomNavigation()));
+              Navigator.of(context).pushReplacement(createRoute(const UserBottomNavigation()));
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Google Sign-In failed')),
