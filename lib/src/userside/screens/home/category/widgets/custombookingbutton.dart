@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/src/widgets/custom_button.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
 
+// ignore: must_be_immutable
 class CustomBookingButton extends StatelessWidget {
   CustomBookingButton({super.key, this.bookAction, this.cartAction,this.saveName});
   void Function()? cartAction;

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:metrogeniusorg/src/employee/screens/home/widgets/custom_worker_button.dart';
-import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_and_review_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_review/rating_and_review_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/booking/widgets/rating_star.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
 import 'package:metrogeniusorg/utils/colors.dart';
@@ -34,13 +34,13 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
       } else {
         return {
           'name': 'Unknown',
-          'photoUrl': '', // Provide a placeholder image URL if needed
+          'photoUrl': '',
         };
       }
     } catch (e) {
       return {
         'name': 'Error',
-        'photoUrl': '', // Provide a placeholder image URL if needed
+        'photoUrl': '', 
       };
     }
   }
@@ -96,8 +96,8 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                       Constants.spaceHight5,
                       Row(
                         children: [
-                          Icon(Icons.location_on_rounded),
-                          SizedBox(width: 8), // Add some space between the icon and the text
+                          const Icon(Icons.location_on_rounded),
+                          const SizedBox(width: 8), // Add some space between the icon and the text
                           Flexible(
                             child: Text(
                               '${doc['Address']}',
@@ -111,8 +111,8 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                       Constants.spaceHight5,
                       Row(
                         children: [
-                          Icon(Icons.calendar_month_outlined),
-                          SizedBox(width: 8), // Add some space between the icon and the text
+                          const Icon(Icons.calendar_month_outlined),
+                          const SizedBox(width: 8), // Add some space between the icon and the text
                           Flexible(
                             child: Text(
                               '${doc['DateTime']}',
@@ -123,7 +123,7 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         color: AppColors.lightGrey,
                       ),
                       if (doc['RequestStatus'] == RequestStatus.accepted.toString())
@@ -154,7 +154,7 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(workerName, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                        Text(
+                                        const Text(
                                           'Service provider',
                                           style: TextStyle(color: Colors.grey),
                                         )
@@ -164,7 +164,8 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {},
-                                  child: Row(
+                                  style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppColors.thirdColor)),
+                                  child: const Row(
                                     children: [
                                       Icon(
                                         Icons.message_rounded,
@@ -177,7 +178,6 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                                       ),
                                     ],
                                   ),
-                                  style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppColors.thirdColor)),
                                 )
                               ],
                             );
@@ -211,7 +211,7 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(workerName, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                        Text(
+                                        const Text(
                                           'Service provider',
                                           style: TextStyle(color: Colors.grey),
                                         )
@@ -280,7 +280,6 @@ class _RequestListBuilderState extends State<RequestListBuilder> {
                       : doc['RequestStatus'] == RequestStatus.completed.toString()
                           ? Colors.grey.shade400
                           : Colors.orangeAccent,
-                  // child:doc['RequestStatus'] == RequestStatus.accepted.toString()? Text('Accepted'):doc['RequestStatus'] == RequestStatus.completed.toString()?Text('Completed'):Text('Pending'),
                 ),
               ],
             ),

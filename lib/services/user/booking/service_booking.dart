@@ -79,27 +79,4 @@ class ServiceBooking {
     }
   }
 
-  static Future<bool> addRatingReview(ratingInfo) async {
-    try {
-     FirebaseFirestore.instance.collection('RatingReviews').doc().set(ratingInfo);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  static Map<String, dynamic> ratingReviewInfo({
-    required String userId,
-    required String review,
-    required String serviceName,
-    required double rating,
-  }) {
-    Map<String, dynamic> addressInfo = {
-     
-      'UserID': userId,
-      'Review':review,
-      'ServiceName':serviceName,
-      'Rating':rating
-    };
-    return addressInfo;
-  }
 }

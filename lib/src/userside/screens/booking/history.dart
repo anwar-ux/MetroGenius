@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:metrogeniusorg/src/userside/screens/booking/getrequests/bloc/get_user_request_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/getuser_request/get_user_request_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/booking/widgets/request_list_builder.dart';
 
 class History extends StatelessWidget {

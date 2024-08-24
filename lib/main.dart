@@ -14,10 +14,11 @@ import 'package:metrogeniusorg/src/employee/screens/register/bloc/employee_job_a
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/forgotpassword/forgot_password_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/user_signin/user_signin_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/User_login/bloc/usersignup/user_signup_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_and_review_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/booking/getrequests/bloc/get_user_request_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_review/rating_and_review_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/getuser_request/get_user_request_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/getstart/common_login_page.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/getcategory/getcategory_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/home/bloc/getratingreview/get_rating_review_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/payment/payment_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/savedservices/saved_services_bloc.dart';
 import 'package:metrogeniusorg/src/userside/screens/home/bloc/servicebooking/service_booking_bloc.dart';
@@ -93,6 +94,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => RatingAndReviewBloc(),
+        ),
+         BlocProvider(
+          create: (context) => GetRatingReviewBloc(),
         ),
       ],
       child: MaterialApp(

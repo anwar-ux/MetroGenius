@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:metrogeniusorg/services/user/booking/service_booking.dart';
+import 'package:metrogeniusorg/services/user/rating/rating_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'rating_and_review_event.dart';
@@ -33,8 +34,8 @@ class RatingAndReviewBloc extends Bloc<RatingAndReviewEvent, RatingAndReviewStat
       final prefs = await SharedPreferences.getInstance();
       final id = prefs.getString('userId');
 
-      final details = ServiceBooking.ratingReviewInfo(userId: id!, review: state.review, rating: state.rating, serviceName:state.serviceName);
-      final result = await ServiceBooking.addRatingReview(details);
+      final details = RatingService.ratingReviewInfo(userId: id!, review: state.review, rating: state.rating, serviceName:state.serviceName);
+      final result = await RatingService.addRatingReview(details);
 
       if (result) {
         emit(state.copyWith(status: RatingFormStatus.success));

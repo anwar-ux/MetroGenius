@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_and_review_bloc.dart';
+import 'package:metrogeniusorg/src/userside/screens/booking/bloc/rating_review/rating_and_review_bloc.dart';
 
 class StarRatingWidget extends StatefulWidget {
   const StarRatingWidget({super.key});
